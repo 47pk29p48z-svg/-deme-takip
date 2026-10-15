@@ -24,140 +24,170 @@
     --line:#EAEAEC;
     --text:#131417;
     --muted:#8C8E94;
-    --paper:#FFFFFF;
-    --paper-line:#EAEAEC;
-    --paper-text:#131417;
-    --paper-muted:#8C8E94;
     --green:#1FA855;
     --amber:#E8A33D;
     --red:#E32227;
+    --blue:#2D5BD1;
     --black:#131417;
-    --mono: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --shadow:0 1px 2px rgba(20,20,25,0.05), 0 1px 8px rgba(20,20,25,0.05);
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:var(--sans); -webkit-font-smoothing:antialiased;
-  }
-  .app{max-width:1120px; margin:0 auto; padding:18px 14px 70px;}
-  header.top{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px;}
-  header.top h1{font-size:22px; margin:0; font-weight:900; letter-spacing:-0.02em; color:var(--text);}
-  header.top .eyebrow{
-    display:inline-block; font-size:11px; color:#fff; background:var(--red);
-    text-transform:uppercase; letter-spacing:0.5px; font-weight:800;
-    padding:5px 12px; border-radius:999px; margin-bottom:6px;
-  }
+  body{margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); -webkit-font-smoothing:antialiased;}
+  .app{max-width:1120px; margin:0 auto; padding:18px 14px 90px;}
 
-  .warnbanner{background:rgba(232,163,61,0.14); border:1px solid rgba(232,163,61,0.5); color:#8a5b0f; border-radius:10px; padding:10px 12px; font-size:12px; margin-bottom:14px; display:none;}
-  .warnbanner.show{display:block;}
+  header.top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:10px;}
+  header.top h1{font-size:27px; margin:0; font-weight:900; letter-spacing:-0.03em;}
+  header.top .eyebrow{display:inline-block; font-size:11px; color:#fff; background:var(--red); letter-spacing:0.7px; text-transform:uppercase; font-weight:800; padding:5px 13px; border-radius:999px; margin-bottom:8px;}
+  .headbtns{display:flex; gap:9px;}
+  .iconbtn{width:46px; height:46px; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; background:#fff; box-shadow:var(--shadow); color:var(--text);}
+  .iconbtn.green{color:var(--green);} .iconbtn.red{color:var(--red);}
 
-  .grid-stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:16px;}
-  .stat{background:var(--surface); border-radius:16px; padding:14px 16px; box-shadow:0 1px 2px rgba(20,20,25,0.05), 0 1px 8px rgba(20,20,25,0.05);}
-  .stat .label{font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:6px; font-weight:800;}
-  .stat .value{font-size:26px; font-weight:900; letter-spacing:-0.01em; color:var(--text);}
+  .tabs{display:flex; gap:6px; background:var(--surface); padding:5px; border-radius:14px; box-shadow:var(--shadow); margin-bottom:14px;}
+  .tabs button{flex:1; border:none; background:none; padding:10px 4px; border-radius:10px; font-family:var(--sans); font-weight:800; font-size:12.5px; color:var(--muted); cursor:pointer;}
+  .tabs button.on{background:var(--black); color:#fff;}
+
+  .banner{border-radius:12px; padding:11px 13px; font-size:12.5px; margin-bottom:12px; font-weight:600; line-height:1.45;}
+  .banner.info{background:var(--surface2); border:1px solid var(--line); color:var(--muted);}
+  .banner.warn{background:rgba(232,163,61,0.14); border:1px solid rgba(232,163,61,0.5); color:#8a5b0f;}
+  .banner.danger{background:rgba(227,34,39,0.09); border:1px solid rgba(227,34,39,0.35); color:#9b1b1f;}
+  .banner b{font-weight:900;}
+  .banner button{margin-left:6px;}
+
+  .grid-stats{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:14px;}
+  .stat{background:var(--surface); border-radius:16px; padding:14px 16px; box-shadow:var(--shadow);}
+  .stat .label{font-size:11px; color:var(--muted); letter-spacing:0.9px; text-transform:uppercase; margin-bottom:8px; font-weight:800;}
+  .stat.tappable{cursor:pointer;}
+  .stat .value{font-size:25px; font-weight:900; letter-spacing:-0.02em;}
   .stat .value.green{color:var(--green);} .stat .value.red{color:var(--red);}
-  .stat .substat{font-size:10.5px; color:var(--muted); margin-top:4px; font-weight:700;}
+  .stat .substat{font-size:11px; color:var(--muted); margin-top:4px; font-weight:700;}
+  .stat.wide{grid-column:1 / -1;}
 
-  .panel{background:var(--surface); border-radius:16px; padding:16px 18px; margin-bottom:14px; box-shadow:0 1px 2px rgba(20,20,25,0.05), 0 1px 8px rgba(20,20,25,0.05);}
-  .panel-head{display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
-  .panel h2{font-size:14px; margin:0; font-weight:900; text-transform:uppercase; letter-spacing:0.2px; color:var(--text);}
-  .panel h2 .count{color:var(--muted); font-weight:700; font-size:11px; text-transform:none;}
-  .month-row{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 4px; border-bottom:1px solid var(--line); cursor:pointer; font-size:13px;}
-  .month-row:last-child{border-bottom:none;}
-  .month-label{font-weight:800; flex:1; color:var(--text);}
-  .month-meta{color:var(--muted); font-size:11px; font-weight:700;}
-  .month-total{font-weight:900; color:var(--text);}
-  .row-item{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 4px; border-bottom:1px solid var(--line); font-size:13px; flex-wrap:wrap;}
+  .bar{height:8px; border-radius:999px; background:var(--surface2); overflow:hidden; margin-top:10px;}
+  .bar span{display:block; height:100%; background:var(--green); border-radius:999px;}
+
+  .panel{background:var(--surface); border-radius:16px; padding:16px 18px; margin-bottom:12px; box-shadow:var(--shadow);}
+  .panel-head{display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .panel h2{font-size:14px; margin:0; font-weight:900; letter-spacing:-0.01em;}
+  .panel h2 .count{color:var(--muted); font-weight:700; font-size:11.5px;}
+  .row-item{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 2px; border-bottom:1px solid var(--line); font-size:13px;}
   .row-item:last-child{border-bottom:none;}
-  .row-item .name{font-weight:800; color:var(--text);}
-  .row-item .sub{color:var(--muted); font-size:11px; font-weight:600;}
+  .row-item .name{font-weight:800;}
+  .row-item .sub{color:var(--muted); font-size:11.5px; font-weight:600;}
+  .empty{font-size:12.5px; color:var(--muted); padding:14px 2px; line-height:1.5;}
 
   .toolbar{display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; align-items:center;}
-  .toolbar input[type=text]{flex:1; min-width:160px; padding:12px 16px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--text); font-size:16px;}
-  .toolbar input::placeholder{color:var(--muted);}
-  button.primary{background:var(--black); color:#fff; border:none; border-radius:999px; padding:12px 18px; font-weight:800; font-size:13px; cursor:pointer; font-family:var(--sans); white-space:nowrap; text-transform:uppercase; letter-spacing:0.3px;}
-  button.secondary{background:#fff; color:var(--text); border:1.5px solid var(--line); border-radius:999px; padding:10px 15px; font-weight:800; font-size:12px; cursor:pointer; font-family:var(--sans);}
-  button.paidbtn{background:var(--green); color:#fff; border:none; border-radius:999px; padding:9px 15px; font-weight:800; font-size:12px; cursor:pointer; font-family:var(--sans); white-space:nowrap;}
-  button.editbtn{background:#fff; border:1.5px solid var(--line); color:var(--text); border-radius:999px; padding:7px 12px; font-size:11px; font-weight:800; cursor:pointer; font-family:var(--sans);}
-  button.linklike{background:none; border:none; color:var(--text); font-size:12px; font-weight:800; cursor:pointer; text-decoration:underline; padding:0;}
-  button.del{background:#FDECEC; border:1.5px solid rgba(227,34,39,0.25); color:var(--red); font-size:10.5px; padding:6px 11px; border-radius:999px; cursor:pointer; font-weight:800;}
-  button.debtbtn{background:#FDF3E3; border:1.5px solid rgba(232,163,61,0.4); color:var(--amber); font-size:10.5px; padding:6px 11px; border-radius:999px; cursor:pointer; font-weight:800;}
-  button.paidsmall{background:#E9F7EF; border:1.5px solid rgba(31,168,85,0.35); color:var(--green); font-size:10.5px; padding:5px 10px; border-radius:999px; cursor:pointer; font-weight:800; white-space:nowrap;}
-  .backup-row{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;}
-  .backup-row button{font-size:11px; padding:9px 14px;}
-  .iconbtn{
-    width:44px; height:44px; border-radius:14px; border:none; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; font-size:19px;
-    box-shadow:0 1px 2px rgba(20,20,25,0.08), 0 1px 8px rgba(20,20,25,0.08);
-    background:#fff;
-  }
-  .iconbtn-green{color:var(--green);}
-  .iconbtn-red{color:var(--red);}
-  .toggle-card{cursor:pointer; display:flex; flex-direction:column; justify-content:center;}
-  .expense-tabs{display:flex; gap:8px; margin-bottom:14px;}
-  .expense-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 4px; border-bottom:1px solid var(--line);}
-  .expense-row:last-child{border-bottom:none;}
-  .expense-row label{font-size:13px; font-weight:800; color:var(--text);}
-  .expense-row input{width:130px; padding:9px 12px; border-radius:10px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px; text-align:right;}
-  .exp-cal-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;}
-  .exp-cal-cell{background:var(--surface2); border-radius:12px; padding:10px 6px; text-align:center;}
-  .exp-cal-cell-active{background:var(--red);}
-  .exp-cal-cell-active .exp-cal-month, .exp-cal-cell-active .exp-cal-amount{color:#fff;}
-  .exp-cal-month{font-size:10.5px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); margin-bottom:4px;}
-  .exp-cal-amount{font-size:10.5px; font-weight:800; color:var(--text);}
+  .toolbar input[type=text]{flex:1; min-width:150px; padding:12px 16px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--text); font-size:16px;}
+  .chips{display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:10px; -webkit-overflow-scrolling:touch;}
+  .chip{white-space:nowrap; border:1.5px solid var(--line); background:#fff; color:var(--muted); border-radius:999px; padding:8px 13px; font-size:12px; font-weight:800; cursor:pointer; font-family:var(--sans);}
+  .chip.on{background:var(--black); border-color:var(--black); color:#fff;}
+  select.sortsel{border:1.5px solid var(--line); background:#fff; border-radius:999px; padding:9px 12px; font-size:12px; font-weight:800; font-family:var(--sans); color:var(--text);}
 
-  .tablewrap{background:var(--surface); border-radius:16px; overflow-x:auto; box-shadow:0 1px 2px rgba(20,20,25,0.05), 0 1px 8px rgba(20,20,25,0.05);}
-  table{width:100%; border-collapse:collapse;}
-  .student-list{display:flex; flex-direction:column; gap:10px;}
-  .student-card{background:var(--surface); border-radius:16px; padding:14px 16px; box-shadow:0 1px 2px rgba(20,20,25,0.05), 0 1px 8px rgba(20,20,25,0.05);}
-  .student-card-top{display:flex; align-items:center; gap:12px;}
+  button.primary{background:var(--black); color:#fff; border:none; border-radius:999px; padding:12px 18px; font-weight:800; font-size:13px; cursor:pointer; font-family:var(--sans); white-space:nowrap;}
+  button.secondary{background:#fff; color:var(--text); border:1.5px solid var(--line); border-radius:999px; padding:10px 15px; font-weight:800; font-size:12px; cursor:pointer; font-family:var(--sans);}
+  button.paidbtn{background:var(--green); color:#fff; border:none; border-radius:999px; padding:10px 16px; font-weight:800; font-size:12.5px; cursor:pointer; font-family:var(--sans); white-space:nowrap;}
+  button.editbtn{background:#fff; border:1.5px solid var(--line); color:var(--text); border-radius:999px; padding:8px 13px; font-size:11.5px; font-weight:800; cursor:pointer; font-family:var(--sans);}
+  button.del{background:#FDECEC; border:1.5px solid rgba(227,34,39,0.25); color:var(--red); font-size:11px; padding:7px 12px; border-radius:999px; cursor:pointer; font-weight:800; font-family:var(--sans);}
+  button.linklike{background:none; border:none; color:var(--text); font-size:12px; font-weight:800; cursor:pointer; text-decoration:underline; padding:0; font-family:var(--sans);}
+  button.paidsmall{background:#E9F7EF; border:1.5px solid rgba(31,168,85,0.35); color:var(--green); font-size:11px; padding:6px 11px; border-radius:999px; cursor:pointer; font-weight:800; font-family:var(--sans); white-space:nowrap;}
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
+
+  .student-list{display:flex; flex-direction:column; gap:9px;}
+  .student-card{background:var(--surface); border-radius:16px; padding:13px 15px; box-shadow:var(--shadow);}
+  .student-card-top{display:flex; align-items:center; gap:11px; cursor:pointer;}
   .student-card-info{flex:1; min-width:0;}
-  .student-card-name{font-weight:900; font-size:15px; color:var(--text); text-transform:uppercase; letter-spacing:0.2px;}
-  .student-card-sub{font-size:11.5px; color:var(--muted); font-weight:700; margin-top:2px;}
-  .student-card-last{font-size:11.5px; color:var(--muted); font-weight:700; margin-top:10px; padding-top:10px; border-top:1px solid var(--line);}
-  .avatar{
-    width:34px; height:34px; min-width:34px; border-radius:50%; background:var(--surface2); color:var(--muted);
-    display:inline-flex; align-items:center; justify-content:center; font-weight:900; font-size:12px;
-  }
-  .badge{font-size:10.5px; padding:5px 11px; border-radius:999px; font-weight:800; white-space:nowrap; display:inline-block; text-transform:uppercase; letter-spacing:0.3px;}
+  .student-card-name{font-weight:900; font-size:14.5px; letter-spacing:-0.01em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .student-card-sub{font-size:11.5px; color:var(--muted); font-weight:700; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .avatar{width:34px; height:34px; min-width:34px; border-radius:50%; background:var(--surface2); color:var(--muted); display:inline-flex; align-items:center; justify-content:center; font-weight:900; font-size:12px;}
+  .cardactions{display:flex; gap:6px; align-items:center; margin-top:10px;}
+  .cardactions .spacer{flex:1;}
+  .badge{font-size:10.5px; padding:6px 12px; border-radius:999px; font-weight:800; white-space:nowrap; display:inline-block; text-transform:uppercase; letter-spacing:0.4px;}
+  .student-card-last{font-size:12px; color:var(--muted); font-weight:700; margin-top:10px; padding-top:10px; border-top:1px solid var(--line);}
   .badge.paid{background:var(--green); color:#fff;}
   .badge.unpaid{background:var(--red); color:#fff;}
   .badge.never{background:var(--surface2); color:var(--muted);}
   .badge.pending2{background:var(--amber); color:#fff;}
-  .mono{font-family:var(--mono); font-weight:800;}
-  .ibare{font-size:11px; color:var(--muted); margin-top:4px; font-weight:600;}
-  .hist-toggle{color:var(--text); font-size:11px; font-weight:800; cursor:pointer; text-decoration:underline;}
-  .actioncell{display:flex; gap:6px; flex-wrap:wrap;}
+  .badge.debt{background:#FDECEC; color:var(--red); border:1px solid rgba(227,34,39,0.25);}
 
-  .histbox{background:var(--surface2); border-radius:10px; padding:10px 12px; margin:6px 0 4px;}
-  .histbox .hrow{display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid var(--line); gap:10px; align-items:center; font-weight:700;}
-  .histbox .hrow:last-child{border-bottom:none;}
-  .histbox .empty{font-size:12px; color:var(--muted); font-style:italic; font-weight:600;}
+  .histbox{background:var(--surface2); border-radius:12px; padding:10px 12px; margin:8px 0 2px;}
+  .hrow{display:flex; justify-content:space-between; gap:10px; align-items:center; font-size:12.5px; padding:7px 0; border-bottom:1px solid var(--line); font-weight:700;}
+  .hrow:last-child{border-bottom:none;}
+  .hrow .grow{flex:1; min-width:0;}
 
-  .overlay{position:fixed; inset:0; background:rgba(10,10,12,0.55); display:flex; align-items:center; justify-content:center; z-index:50; padding:16px;}
-  .modal{background:var(--surface); border-radius:20px; padding:22px; width:100%; max-width:420px; max-height:85vh; overflow-y:auto; -webkit-overflow-scrolling:touch;}
-  .modal h3{margin:0 0 14px; font-size:17px; font-weight:900; color:var(--text);}
-  .field{margin-bottom:12px;}
-  .field label{display:block; font-size:11px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; font-weight:800;}
-  .field input{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px;}
-  .modal-actions{display:flex; gap:8px; margin-top:16px; position:sticky; bottom:-22px; background:var(--surface); padding:10px 0 4px; margin-bottom:-22px;}
+  .overlay{position:fixed; inset:0; background:rgba(10,10,12,0.55); display:flex; align-items:center; justify-content:center; z-index:60; padding:14px;}
+  #detailOverlay{z-index:55;}
+  #confirmOverlay, #alertOverlay{z-index:90;}
+  .modal{background:var(--surface); border-radius:20px; padding:20px; width:100%; max-width:440px; max-height:88vh; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+  .modal h3{margin:0 0 12px; font-size:17px; font-weight:900;}
+  .field{margin-bottom:11px;}
+  .field label{display:block; font-size:11.5px; color:var(--muted); margin-bottom:5px; font-weight:800;}
+  .field input, .field select, .field textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px; font-family:var(--sans);}
+  .field .hint{font-size:11px; color:var(--muted); margin-top:4px; font-weight:600;}
+  .modal-actions{display:flex; gap:8px; margin-top:14px; position:sticky; bottom:-20px; background:var(--surface); padding:10px 0 4px; margin-bottom:-20px;}
   .modal-actions button{flex:1;}
-  footer.note{text-align:center; color:var(--muted); font-size:11px; margin-top:24px; font-weight:600;}
-  @media(max-width:600px){ .grid-stats{grid-template-columns:repeat(2,1fr);} }
+  .twocol{display:flex; gap:8px;} .twocol > *{flex:1; min-width:0;}
+
+  .menu{position:absolute; z-index:70; background:#fff; border-radius:14px; box-shadow:0 8px 30px rgba(20,20,25,0.18); padding:6px; min-width:190px;}
+  .menu button{display:block; width:100%; text-align:left; background:none; border:none; padding:11px 12px; font-size:13px; font-weight:700; border-radius:10px; cursor:pointer; font-family:var(--sans); color:var(--text);}
+  .menu button:hover{background:var(--surface2);}
+  .menu button.danger{color:var(--red);}
+
+  .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:18px; z-index:80; background:var(--black); color:#fff; border-radius:14px; padding:12px 14px; display:flex; align-items:center; gap:14px; font-size:13px; font-weight:700; box-shadow:0 8px 30px rgba(0,0,0,0.28); max-width:calc(100% - 28px);}
+  .toast button{background:none; border:none; color:#fff; font-weight:900; font-size:13px; text-decoration:underline; cursor:pointer; font-family:var(--sans); white-space:nowrap;}
+
+  .cal-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px;}
+  .cal-cell{background:var(--surface2); border:1.5px solid transparent; border-radius:12px; padding:10px 6px; text-align:center; cursor:pointer; font-family:var(--sans);}
+  .cal-cell.on{background:#fff; border-color:var(--black);}
+  .cal-cell .m{font-size:11px; font-weight:900; color:var(--muted); margin-bottom:3px;}
+  .cal-cell .a{font-size:11px; font-weight:800; color:var(--text);}
+  .cal-cell.today .m{color:var(--blue);}
+
+  .tx-row{display:flex; align-items:center; gap:10px; padding:10px 2px; border-bottom:1px solid var(--line); font-size:13px;}
+  .tx-row:last-child{border-bottom:none;}
+  .tx-row .d{font-size:11px; color:var(--muted); font-weight:700; width:52px; flex:0 0 auto;}
+  .tx-row .t{flex:1; min-width:0;}
+  .tx-row .t .c{font-weight:800;}
+  .tx-row .t .n{font-size:11.5px; color:var(--muted); font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .tx-row .v{font-weight:900; white-space:nowrap;}
+
+  footer.note{text-align:center; color:var(--muted); font-size:11px; margin-top:20px; font-weight:600; line-height:1.6;}
+  @media(min-width:760px){ .grid-stats{grid-template-columns:repeat(4,1fr);} }
+
+  #printArea{display:none;}
+  @media print{
+    body{background:#fff;}
+    body > *{display:none !important;}
+    #printArea{display:block !important; padding:0; font-size:12px;}
+    #printArea h2{font-size:18px; margin:0 0 2px;}
+    #printArea table{width:100%; border-collapse:collapse; margin-top:10px;}
+    #printArea th, #printArea td{border-bottom:1px solid #ddd; padding:6px 4px; text-align:left; font-size:12px;}
+    #printArea th{border-bottom:2px solid #333;}
+    #printArea .r{text-align:right;}
+  }
 </style>
 </head>
 <body>
 <div class="app" id="app"></div>
+<div id="printArea"></div>
 <input type="file" id="importFile" accept="application/json" style="display:none" onchange="handleImportFile(event)">
 <script>
-/* ---------- storage: browser localStorage, tied to this device/browser ---------- */
-const STORAGE_OK = (function(){
-  try{
-    const t='__test__'; localStorage.setItem(t,'1'); localStorage.removeItem(t); return true;
-  }catch(e){ return false; }
-})();
+/* ===================== storage ===================== */
+const KEYS = {
+  students:'coach_students_v3',
+  payments:'coach_payments_v3',
+  installments:'coach_installments_v1',
+  expensesOld:'coach_expenses_v1',
+  expenses:'coach_expenses_v2',
+  other:'coach_other_income_v1',
+  cats:'coach_expense_cats_v1',
+  meta:'coach_meta_v1'
+};
+const BACKUP_VERSION = 2;
 
+const STORAGE_OK = (function(){
+  try{ const t='__t__'; localStorage.setItem(t,'1'); localStorage.removeItem(t); return true; }catch(e){ return false; }
+})();
 function getList(key){
   if(!STORAGE_OK) return (window.__mem && window.__mem[key]) || [];
   try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : []; }
@@ -166,939 +196,1508 @@ function getList(key){
 function saveList(key, list){
   if(!STORAGE_OK){ window.__mem = window.__mem||{}; window.__mem[key]=list; return true; }
   try{ localStorage.setItem(key, JSON.stringify(list)); return true; }
-  catch(e){ console.error('yazma hatası', e); return false; }
+  catch(e){ console.error('yazma hatası', e); showAlert('Kayıt yapılamadı — tarayıcı depolaması dolu veya kapalı olabilir. Verinizi kaybetmemek için hemen Rapor sekmesinden yedek alın.'); return false; }
+}
+function getObj(key, fallback){
+  if(!STORAGE_OK) return (window.__memo && window.__memo[key]) || fallback;
+  try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; }
+}
+function saveObj(key, obj){
+  if(!STORAGE_OK){ window.__memo = window.__memo||{}; window.__memo[key]=obj; return true; }
+  try{ localStorage.setItem(key, JSON.stringify(obj)); return true; }catch(e){ return false; }
 }
 
-let students = [];
-let payments = [];
-let installments = []; // {id, studentId, amount, dueDate, paid, paidDate, note, createdAt}
-let ready = false;
-let expanded = {};
-let searchQ = '';
-let allHistoryOpen = false;
-let expensesOpen = false;
-let expenseTab = 'aylik';
-let expenseCalendarOpen = false;
-let expenseCalendarYear = new Date().getFullYear();
-let expenses = []; // {id, month:'YYYY-MM', category, amount, createdAt}
-let otherIncomes = []; // {id, amount, date, source, createdAt} — Diğer Gelirler
+/* ===================== state ===================== */
+let students = [], payments = [], installments = [], expenses = [], otherIncomes = [];
+let expenseCats = [];
+let meta = {lastBackupAt:null, pin:null};
+let ready = false, locked = false;
+
+let panelOpen = {gider:false, rapor:false, odemeler:false, taksit:false};
 let otherPaymentsOpen = false;
-let otherHistOpen = false;
-const EXPENSE_CATEGORIES = [
+let settingsOpen = false;
+let searchQ = '', filterMode = 'all', sortMode = 'name';
+let detailStudentId = null;       // öğrenci dosyası
+let detailTab = 'ozet';
+let kasaMonth = null;             // 'YYYY-MM'
+let kasaYear = new Date().getFullYear();
+let monthOpen = {};
+let menuState = null;             // {x,y,items}
+let confirmState = null, alertState = null, toastState = null, toastTimer = null;
+let collectState = null;          // tahsilat modalı
+let addModalOpen = false, editingStudentId = null, editingPaymentId = null;
+let installmentModalStudentId = null, editingInstallmentId = null, creditModalStudentId = null;
+let expenseModal = null, incomeModal = null, textBackupOpen = false, textImportOpen = false, pinModalOpen = false;
+let instRows = [];
+
+const DEFAULT_CATS = [
   {key:'kart', label:'Kredi Kartı'},
-  {key:'kira', label:'Kiralar'},
-  {key:'fatura', label:'Faturalar'},
-  {key:'vergi', label:'Vergiler'},
+  {key:'kira', label:'Kira'},
+  {key:'fatura', label:'Fatura'},
+  {key:'vergi', label:'Vergi'},
+  {key:'ulasim', label:'Ulaşım'},
   {key:'diger', label:'Diğer'}
 ];
-let monthOpen = {};
-let addModalOpen = false;
-let editingStudentId = null;
-let editingPaymentId = null;
-let installmentModalStudentId = null;
-let creditModalStudentId = null;
-let confirmState = null; // {message, action}
-let alertState = null; // string
+const MONTH_SHORT = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
 
+/* ===================== utils ===================== */
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function currentMonthKey(){ return todayStr().slice(0,7); }
+function fmtDate(d){ if(!d) return '—'; const dt=new Date(d+'T00:00:00'); return dt.toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
+function fmtShort(d){ if(!d) return '—'; const [y,m,dd]=d.split('-'); return `${dd} ${MONTH_SHORT[Number(m)-1]}`; }
+function fmtMoney(n){ return (Math.round(Number(n)||0)).toLocaleString('tr-TR')+' ₺'; }
+function initials(name){ return (name||'').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase(); }
+function monthKey(d){ return (d||'').slice(0,7); }
+function monthLabel(key){ const [y,m]=key.split('-').map(Number); return new Date(y,m-1,1).toLocaleDateString('tr-TR',{month:'long',year:'numeric'}); }
+function isThisMonth(d){ return monthKey(d)===currentMonthKey(); }
+function inMonth(d, mk){ return monthKey(d)===mk; }
+function daysBetween(dateStr){ return Math.round((new Date(dateStr+'T00:00:00') - new Date(todayStr()+'T00:00:00'))/86400000); }
+function addMonths(mk, delta){ const [y,m]=mk.split('-').map(Number); const d=new Date(y,m-1+delta,1); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; }
+function catLabel(key){ const c = expenseCats.find(x=>x.key===key); return c ? c.label : key; }
+
+/* ===================== load & migrate ===================== */
 function loadAll(){
-  students = getList('coach_students_v3');
-  payments = getList('coach_payments_v3');
-  installments = getList('coach_installments_v1');
-  expenses = getList('coach_expenses_v1');
-  otherIncomes = getList('coach_other_income_v1');
+  students = getList(KEYS.students);
+  payments = getList(KEYS.payments);
+  installments = getList(KEYS.installments);
+  otherIncomes = getList(KEYS.other);
+  expenseCats = getList(KEYS.cats);
+  if(!expenseCats.length){ expenseCats = DEFAULT_CATS.slice(); saveList(KEYS.cats, expenseCats); }
+  expenses = getList(KEYS.expenses);
+  const old = getList(KEYS.expensesOld);
+  if(!expenses.length && old.length){
+    // eski {month,category,amount} kutuları → tarihli işlemlere çevir
+    expenses = old.filter(e=>Number(e.amount)>0).map(e=>({
+      id: e.id || uid(),
+      date: (e.month||currentMonthKey())+'-01',
+      category: e.category,
+      amount: Number(e.amount)||0,
+      desc: 'Aylık toplam (eski kayıttan aktarıldı)',
+      createdAt: e.createdAt || new Date().toISOString()
+    }));
+    saveList(KEYS.expenses, expenses);
+  }
+  meta = getObj(KEYS.meta, {lastBackupAt:null, pin:null});
+  locked = !!meta.pin;
   ready = true;
   render();
 }
+function saveStudents(){ saveList(KEYS.students, students); }
+function savePayments(){ saveList(KEYS.payments, payments); }
+function saveInstallments(){ saveList(KEYS.installments, installments); }
+function saveExpenses(){ saveList(KEYS.expenses, expenses); }
+function saveOther(){ saveList(KEYS.other, otherIncomes); }
+function saveMeta(){ saveObj(KEYS.meta, meta); }
+function saveAll(){ saveStudents(); savePayments(); saveInstallments(); saveExpenses(); saveOther(); saveList(KEYS.cats, expenseCats); }
 
-function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
-function todayStr(){
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,'0');
-  const day = String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
+/* ===================== undo ===================== */
+function snapshot(){ return JSON.stringify({students, payments, installments, expenses, otherIncomes}); }
+function restoreSnapshot(snap){
+  const d = JSON.parse(snap);
+  students=d.students; payments=d.payments; installments=d.installments; expenses=d.expenses; otherIncomes=d.otherIncomes;
+  saveAll(); render();
 }
-function fmtDate(d){ if(!d) return '—'; const dt=new Date(d+'T00:00:00'); return dt.toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
-function fmtMoney(n){ return (n||0).toLocaleString('tr-TR')+' ₺'; }
-function initials(name){
-  return (name||'').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+function withUndo(label, fn){
+  const snap = snapshot();
+  fn();
+  showToast(label, ()=>restoreSnapshot(snap));
 }
-function isThisMonth(d){ if(!d) return false; const now=new Date(); const dt=new Date(d+'T00:00:00'); return dt.getFullYear()===now.getFullYear() && dt.getMonth()===now.getMonth(); }
+function showToast(label, undoFn){
+  toastState = {label, undoFn};
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ toastState=null; renderToast(); }, 10000);
+  renderToast();
+}
+function undoNow(){
+  const fn = toastState && toastState.undoFn;
+  toastState = null; if(toastTimer) clearTimeout(toastTimer);
+  renderToast();
+  if(fn) fn();
+}
+function renderToast(){
+  const ex = document.getElementById('undoToast'); if(ex) ex.remove();
+  if(!toastState) return;
+  const d = document.createElement('div');
+  d.id='undoToast'; d.className='toast';
+  d.innerHTML = `<span>${esc(toastState.label)}</span><button onclick="undoNow()">Geri al</button>`;
+  document.body.appendChild(d);
+}
 
+/* ===================== derived data ===================== */
 function studentPayments(sid){
   return payments.filter(p=>p.studentId===sid).sort((a,b)=> b.date.localeCompare(a.date) || (b.createdAt||'').localeCompare(a.createdAt||''));
 }
 function studentTotal(sid){ return payments.filter(p=>p.studentId===sid).reduce((s,p)=>s+Number(p.amount||0),0); }
-
-function daysBetween(dateStr){
-  const today = new Date(todayStr()+'T00:00:00');
-  const target = new Date(dateStr+'T00:00:00');
-  return Math.round((target - today) / 86400000);
-}
-function installmentStatus(inst){
-  if(inst.paid) return 'paid';
-  const d = daysBetween(inst.dueDate);
+function studentInstallments(sid){ return installments.filter(i=>i.studentId===sid).sort((a,b)=> a.dueDate.localeCompare(b.dueDate)); }
+function pendingInstallments(){ return installments.filter(i=>!i.paid).sort((a,b)=> a.dueDate.localeCompare(b.dueDate)); }
+function installmentStatus(i){
+  if(i.paid) return 'paid';
+  const d = daysBetween(i.dueDate);
   if(d < 0) return 'overdue';
   if(d <= 7) return 'upcoming';
   return 'scheduled';
 }
-function studentInstallments(sid){
-  return installments.filter(i=>i.studentId===sid).sort((a,b)=> a.dueDate.localeCompare(b.dueDate));
-}
-function pendingInstallments(){
-  return installments.filter(i=>!i.paid).sort((a,b)=> a.dueDate.localeCompare(b.dueDate));
-}
-function installmentStatusLabel(status){
-  if(status==='overdue') return 'Gecikti';
-  if(status==='upcoming') return 'Bu hafta';
-  if(status==='paid') return 'Ödendi';
-  return 'Planlandı';
-}
-function installmentStatusClass(status){
-  if(status==='overdue') return 'unpaid';
-  if(status==='upcoming') return 'pending2';
-  if(status==='paid') return 'paid';
-  return 'never';
-}
+function statusLabel(s){ return s==='overdue'?'Gecikti':(s==='upcoming'?'Bu hafta':(s==='paid'?'Ödendi':'Planlandı')); }
+function statusClass(s){ return s==='overdue'?'unpaid':(s==='upcoming'?'pending2':(s==='paid'?'paid':'never')); }
+function memberNameOf(sid, fallback){ const s = students.find(x=>x.id===sid); return s ? s.name : (fallback ? fallback + ' (silinmiş)' : '(silinmiş öğrenci)'); }
+function paidInMonth(sid, mk){ return payments.some(p=>p.studentId===sid && inMonth(p.date, mk)); }
+function hasOverdue(sid){ return installments.some(i=>i.studentId===sid && !i.paid && installmentStatus(i)==='overdue'); }
 
-function monthKey(d){ return d.slice(0,7); }
-function monthLabel(key){
-  const [y,m] = key.split('-').map(Number);
-  const dt = new Date(y, m-1, 1);
-  return dt.toLocaleDateString('tr-TR', {month:'long', year:'numeric'});
+function monthIncome(mk){
+  const st = payments.filter(p=>inMonth(p.date,mk)).reduce((s,p)=>s+Number(p.amount||0),0);
+  const ot = otherIncomes.filter(o=>inMonth(o.date,mk)).reduce((s,o)=>s+Number(o.amount||0),0);
+  return {student:st, other:ot, total:st+ot};
 }
-function monthlyBreakdown(){
-  const map = {};
-  payments.forEach(p=>{
-    const key = monthKey(p.date);
-    if(!map[key]) map[key] = {total:0, items:[]};
-    map[key].total += Number(p.amount||0);
-    map[key].items.push({...p, kind:'student'});
-  });
-  otherIncomes.forEach(o=>{
-    const key = monthKey(o.date);
-    if(!map[key]) map[key] = {total:0, items:[]};
-    map[key].total += Number(o.amount||0);
-    map[key].items.push({...o, kind:'other'});
-  });
-  return Object.keys(map).sort().reverse().map(key=>({
-    key,
-    label: monthLabel(key),
-    total: map[key].total,
-    items: map[key].items.slice().sort((a,b)=> b.date.localeCompare(a.date))
-  }));
+function monthExpense(mk){ return expenses.filter(e=>inMonth(e.date,mk)).reduce((s,e)=>s+Number(e.amount||0),0); }
+function expectedThisMonth(){
+  return students.filter(s=> (s.rhythm||'aylik')==='aylik').reduce((s,st)=>s+Number(st.price||0),0);
 }
-
+function unpaidStudents(mk){
+  return students.filter(s=> !paidInMonth(s.id, mk)).sort((a,b)=>a.name.localeCompare(b.name,'tr'));
+}
 function globalStats(){
-  const totalAll = payments.reduce((s,p)=>s+Number(p.amount||0),0);
-  const totalMonth = payments.filter(p=>isThisMonth(p.date)).reduce((s,p)=>s+Number(p.amount||0),0);
-  const otherTotal = otherIncomes.reduce((s,o)=>s+Number(o.amount||0),0);
-  const otherMonthTotal = otherIncomes.filter(o=>isThisMonth(o.date)).reduce((s,o)=>s+Number(o.amount||0),0);
-  const grandTotal = totalAll + otherTotal;
-  const grandMonthTotal = totalMonth + otherMonthTotal;
-  const paidThisMonth = students.filter(s=> studentPayments(s.id).some(p=>isThisMonth(p.date))).length;
-  const unpaidThisMonth = students.length - paidThisMonth;
-  const monthsEarnedCount = new Set(payments.map(p=>monthKey(p.date))).size;
-  const pending = pendingInstallments();
-  const overdueInstallments = pending.filter(i=>installmentStatus(i)==='overdue');
-  const upcomingInstallments = pending.filter(i=>installmentStatus(i)==='upcoming');
-  const pendingInstallmentTotal = pending.reduce((s,i)=>s+Number(i.amount||0),0);
-  const debtors = students.filter(s=>s.debt);
-  const debtorsTotal = debtors.reduce((s,st)=>s+Number(st.debt||0),0);
-  return {totalAll, totalMonth, otherTotal, otherMonthTotal, grandTotal, grandMonthTotal, paidThisMonth, unpaidThisMonth, monthsEarnedCount, pending, overdueInstallments, upcomingInstallments, pendingInstallmentTotal, debtors, debtorsTotal};
+  const mk = currentMonthKey();
+  const inc = monthIncome(mk);
+  const exp = monthExpense(mk);
+  const unpaid = unpaidStudents(mk);
+  const pend = pendingInstallments();
+  return {
+    mk, inc, exp, net: inc.total-exp,
+    expected: expectedThisMonth(),
+    paidCount: students.length - unpaid.length,
+    unpaid,
+    totalAll: payments.reduce((s,p)=>s+Number(p.amount||0),0),
+    otherAll: otherIncomes.reduce((s,o)=>s+Number(o.amount||0),0),
+    pending: pend,
+    overdue: pend.filter(i=>installmentStatus(i)==='overdue'),
+    upcoming: pend.filter(i=>installmentStatus(i)==='upcoming'),
+    pendingTotal: pend.reduce((s,i)=>s+Number(i.amount||0),0),
+    debtors: students.filter(s=>Number(s.debt)>0),
+    debtorsTotal: students.reduce((s,st)=>s+Number(st.debt||0),0)
+  };
+}
+function backupAgeDays(){
+  if(!meta.lastBackupAt) return null;
+  return Math.floor((Date.now() - new Date(meta.lastBackupAt).getTime())/86400000);
 }
 
+/* ===================== render shell ===================== */
 function render(){
   const app = document.getElementById('app');
-  if(!ready){ app.innerHTML='<p style="color:var(--muted);padding:40px;text-align:center;">Yükleniyor…</p>'; return; }
+  if(!ready){ app.innerHTML = '<p class="empty" style="text-align:center;padding:40px;">Yükleniyor…</p>'; return; }
+  if(locked){ renderLock(); return; }
   const g = globalStats();
   let h = `
   <header class="top">
-    <div><div class="eyebrow">Kişisel Koçluk</div><h1>Ödeme Takip Sistemi</h1></div>
-    <div style="display:flex; gap:8px;">
-      <button class="iconbtn iconbtn-green" onclick="exportBackup()" title="Kaydet" aria-label="Yedekle (kaydet)"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg></button>
-      <button class="iconbtn iconbtn-red" onclick="document.getElementById('importFile').click()" title="Kaydı Aktar" aria-label="Yedeği geri yükle"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg></button>
-      <button class="iconbtn" onclick="alert('Fatura modülü yakında eklenecek.')" title="Fatura" aria-label="Fatura"><svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
-<text x="50" y="15" text-anchor="middle" font-family="var(--sans)" font-weight="800" font-size="22.73" fill="#E32227" letter-spacing="1.82">FATURA</text>
-<g transform="translate(13,28) scale(0.72)"><path d="M 20.30 1.59 L 13.92 9.46 L 10.10 22.85 L 10.10 30.07 L 13.71 59.09 L 12.43 75.35 L 11.16 79.06 L 2.13 76.62 L 0.43 77.15 L 0.11 81.83 L 2.02 87.14 L 4.68 90.44 L 9.46 92.77 L 72.58 92.77 L 77.26 91.07 L 82.04 86.61 L 85.55 81.30 L 88.20 74.50 L 89.69 66.21 L 89.90 55.15 L 84.80 18.70 L 97.87 18.07 L 98.09 16.47 L 95.43 12.75 L 98.51 12.11 L 99.79 10.63 L 98.09 3.83 L 95.64 1.28 L 92.03 0.00 L 24.44 0.00 Z M 3.08 80.66 L 3.40 80.45 L 5.74 81.51 L 8.93 82.15 L 60.79 82.04 L 61.21 82.36 L 62.06 85.76 L 64.19 89.59 L 10.31 89.80 L 7.97 88.95 L 5.21 86.40 L 3.72 83.63 Z M 94.37 4.25 L 95.43 5.42 L 95.96 6.27 L 95.96 6.48 L 96.49 7.55 L 96.81 9.25 L 96.60 9.56 L 94.90 9.56 L 94.79 9.67 L 93.73 9.78 L 92.77 10.20 L 92.45 10.52 L 92.24 10.95 L 92.24 12.43 L 93.30 15.20 L 92.99 15.41 L 85.23 15.41 L 84.80 15.09 L 84.80 14.77 L 84.91 14.67 L 84.91 13.82 L 85.12 12.96 L 85.12 12.11 L 85.23 12.01 L 85.33 10.84 L 85.87 8.71 L 86.08 8.40 L 86.08 7.97 L 87.04 5.84 L 87.78 4.78 L 88.95 3.72 L 90.01 3.19 L 90.54 3.19 L 90.65 3.08 L 92.35 3.19 L 93.62 3.72 Z M 22.32 3.93 L 24.97 3.08 L 84.91 3.29 L 82.15 10.95 L 81.72 20.30 L 85.87 46.33 L 86.72 65.46 L 85.65 72.26 L 83.21 79.28 L 80.13 84.17 L 75.66 88.42 L 71.94 89.80 L 68.33 88.95 L 64.82 84.70 L 63.87 79.91 L 61.96 79.06 L 14.56 78.96 L 16.37 70.46 L 16.68 60.15 L 13.28 30.71 L 13.28 22.21 L 16.15 11.90 L 19.66 6.27 Z" fill="#161616" fill-rule="evenodd"/><path d="M 24.76 70.35 L 25.93 71.94 L 73.65 72.05 L 75.45 70.78 L 73.65 68.97 L 26.46 68.97 Z" fill="#161616"/><path d="M 24.87 60.26 L 25.61 62.06 L 74.50 62.06 L 75.45 60.89 L 73.86 59.09 L 26.46 59.09 Z" fill="#161616"/><path d="M 24.87 50.48 L 25.93 52.39 L 75.45 51.33 L 74.28 49.42 L 26.35 49.31 Z" fill="#161616"/><path d="M 24.87 41.76 L 74.50 42.61 L 75.45 40.91 L 74.39 39.64 L 26.14 39.64 Z" fill="#161616"/><path d="M 24.87 31.03 L 26.04 33.05 L 74.28 32.94 L 75.35 31.77 L 74.18 29.97 Z" fill="#161616"/><path d="M 24.87 20.51 L 26.04 22.10 L 75.13 21.47 L 73.22 19.23 L 26.14 19.02 Z" fill="#161616"/></g>
-</svg></button>
+    <div><div class="eyebrow">Kişisel Koçluk</div><h1>Ödeme Takip</h1></div>
+    <div class="headbtns">
+      <button class="iconbtn green" onclick="exportBackup()" title="Yedeği indir" aria-label="Yedeği indir">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg></button>
+      <button class="iconbtn red" onclick="document.getElementById('importFile').click()" title="Yedeği geri yükle" aria-label="Yedeği geri yükle">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V5"/><path d="m7 9 5-5 5 5"/><path d="M4 20h16"/></svg></button>
+      <button class="iconbtn" onclick="openSettings()" title="Ayarlar" aria-label="Ayarlar">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.36.44.63.79.76H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></button>
     </div>
-  </header>
-  <div class="warnbanner ${STORAGE_OK?'':'show'}">Bu tarayıcıda kalıcı depolama kullanılamıyor (gizli/özel sekme olabilir). Veriler yalnızca bu oturum boyunca tutulacak — sayfayı kapatmadan önce mutlaka yeşil disket ile kaydedin.</div>
-  <div class="grid-stats">
-    <div class="stat"><div class="label">Bu Ay Ödeyen</div><div class="value green">${g.paidThisMonth}</div></div>
-    <div class="stat"><div class="label">Bu Ay Ödemeyen</div><div class="value ${g.unpaidThisMonth>0?'red':''}">${g.unpaidThisMonth}</div></div>
-    <div class="stat"><div class="label">Toplam Öğrenci</div><div class="value">${students.length}</div></div>
-    <div class="stat"><div class="label">Bu Ay Tahsilat</div><div class="value">${fmtMoney(g.grandMonthTotal)}</div><div class="substat" style="color:var(--green); font-weight:800;">Öğrenciler: ${fmtMoney(g.totalMonth)}</div><div class="substat" style="color:var(--amber); font-weight:800;">Diğer Gelirler: ${fmtMoney(g.otherMonthTotal)}</div></div>
-    <div class="stat"><div class="label">Toplam Tahsilat</div><div class="value">${fmtMoney(g.grandTotal)}</div><div class="substat" style="color:var(--green); font-weight:800;">Öğrenciler: ${fmtMoney(g.totalAll)}</div><div class="substat" style="color:var(--amber); font-weight:800;">Diğer Gelirler: ${fmtMoney(g.otherTotal)}</div></div>
-    <div class="stat toggle-card" onclick="toggleExpenses()">
-      <div class="label">${expensesOpen ? 'Kapat' : 'Görüntüle'}</div>
-      <div class="value" style="font-size:16px; display:flex; align-items:center; gap:6px;">💸 Giderler</div>
-      <div class="substat" style="color:var(--red);">Bu ay: ${fmtMoney(currentMonthExpenseTotal())}</div>
-    </div>
-  </div>
-  ${expensesOpen ? renderExpensesPanel() : ''}
-  ${g.pending.length ? `
-  <section class="panel" style="border-color:${g.overdueInstallments.length?'rgba(225,80,61,0.4)':(g.upcomingInstallments.length?'rgba(232,163,61,0.4)':'var(--line)')};">
-    <h2 style="margin-bottom:10px;">⏰ Taksit Takibi <span class="count">(${g.pending.length} bekleyen · ${fmtMoney(g.pendingInstallmentTotal)})</span></h2>
-    ${renderInstallmentList(g.pending)}
-  </section>` : ''}
-  ${g.debtors.length ? `
-  <section class="panel" style="border-color:rgba(227,34,39,0.35);">
-    <h2 style="margin-bottom:10px;">💳 Kredili Öğrenciler <span class="count">(${g.debtors.length} kişi · ${fmtMoney(g.debtorsTotal)})</span></h2>
-    ${g.debtors.map(s=>`<div class="row-item"><span class="name">${s.name}${s.debtDate? ` <span class="sub" style="font-weight:600;">· ${fmtDate(s.debtDate)}</span>` : ''} <button class="paidsmall" onclick="clearDebt('${s.id}')">✓ Ödendi</button></span><span style="color:var(--red); font-weight:900;">-${fmtMoney(s.debt)}</span></div>`).join('')}
-  </section>` : ''}
-  <section class="panel">
-    <div class="panel-head" onclick="toggleAllHistory()">
-      <h2>Tüm Ödemeler <span class="count">(geçmiş dahil · ${payments.length + otherIncomes.length} kayıt)</span></h2>
-      <span class="hist-toggle">${allHistoryOpen? 'Gizle' : 'Göster'}</span>
-    </div>
-    ${allHistoryOpen ? renderMonthlyBreakdown() : ''}
-  </section>
-  <section class="panel">
-    <div class="panel-head" onclick="toggleOtherPayments()">
-      <h2>Diğer Gelirler</h2>
-      <span class="hist-toggle">${otherPaymentsOpen? 'Gizle' : 'Göster'}</span>
-    </div>
-    ${otherPaymentsOpen ? renderOtherPaymentsPanel() : ''}
-  </section>
-  <div class="toolbar">
-    <input type="text" placeholder="Öğrenci ara…" value="${searchQ}" oninput="onSearch(this.value)">
-    <button class="primary" onclick="openAddModal()">+ Kişi Ekle</button>
-  </div>
-  <div class="student-list">`;
+  </header>`;
 
-  const q = searchQ.trim().toLowerCase();
-  const list = students.filter(s=>s.name.toLowerCase().includes(q)).sort((a,b)=>a.name.localeCompare(b.name,'tr'));
-  if(list.length===0){
-    h += `<div class="panel" style="text-align:center; color:var(--muted);">Öğrenci yok. "+ Kişi Ekle" ile ekleyin.</div>`;
+  if(!STORAGE_OK){
+    h += `<div class="banner danger">Bu tarayıcıda kalıcı depolama kapalı (gizli sekme olabilir). Veriler yalnızca bu oturumda tutulur — kapatmadan önce yedeği indirin.</div>`;
   }
-  list.forEach(s=>{
-    const hist = studentPayments(s.id);
-    const last = hist[0];
-    const paidNow = last && isThisMonth(last.date);
-    let badge = `<span class="badge never">Hiç ödeme yok</span>`;
-    if(last){ badge = paidNow? `<span class="badge paid">Bu ay ödedi</span>` : `<span class="badge unpaid">Bu ay ödemedi</span>`; }
-    h += `<div class="student-card">
-      <div class="student-card-top">
-        <span class="avatar">${initials(s.name)}</span>
-        <div class="student-card-info">
-          <div class="student-card-name">${s.name}</div>
-          <div class="student-card-sub">${fmtMoney(s.price)} ders ücreti</div>
-        </div>
-        ${badge}
-      </div>
-      ${last? `<div class="student-card-last">Son ödeme: ${fmtDate(last.date)} · ${fmtMoney(last.amount)}</div>` : ''}
-      <div class="actioncell" style="margin-top:10px;">
-        <button class="paidbtn" onclick="markPaidToday('${s.id}')">✓ Ücret Ödendi</button>
-        <button class="editbtn" onclick="openEditModal('${s.id}')">Düzenle</button>
-        <button class="editbtn" onclick="openInstallmentModal('${s.id}')">🗓️ Taksit Planla</button>
-        <button class="del" onclick="deleteStudent('${s.id}')">Öğrenciyi Sil</button>
-        <button class="debtbtn" onclick="openCreditModal('${s.id}')">Kredi Tanımla</button>
-      </div>
-      <div style="margin-top:10px;"><span class="hist-toggle" onclick="toggleHist('${s.id}')">${expanded[s.id] ? 'Geçmişi Gizle' : 'Geçmiş ('+hist.length+')'}</span></div>`;
-    if(expanded[s.id]){
-      h += `<div class="histbox" style="margin-top:8px;">`;
-      if(hist.length===0){ h += `<div class="empty">Henüz ödeme kaydı yok.</div>`; }
-      else{
-        hist.forEach(p=>{
-          h += `<div class="hrow"><span>${fmtDate(p.date)}</span><span>${fmtMoney(p.amount)}</span><span style="display:flex;gap:8px;"><button class="linklike" onclick="openEditPaymentModal('${p.id}')">Düzenle</button><button class="del" onclick="deletePayment('${p.id}')">Sil</button></span></div>`;
-        });
-      }
-      const sInst = studentInstallments(s.id);
-      if(sInst.length){
-        h += `<div style="margin-top:10px; padding-top:8px; border-top:1px solid var(--line); font-weight:800; font-size:12px;">Taksitler</div>`;
-        sInst.forEach(i=>{
-          const status = installmentStatus(i);
-          h += `<div class="hrow"><span>${fmtDate(i.dueDate)}${i.note? ' · '+i.note : ''}</span><span>${fmtMoney(i.amount)}</span><span style="display:flex;gap:8px;align-items:center;">
-            <span class="badge ${installmentStatusClass(status)}" style="font-size:10px;">${installmentStatusLabel(status)}</span>
-            ${!i.paid? `<button class="linklike" onclick="markInstallmentPaid('${i.id}')">Ödendi İşaretle</button>`:''}
-            <button class="linklike" onclick="openEditInstallmentModal('${i.id}')">Düzenle</button>
-            <button class="del" onclick="deleteInstallment('${i.id}')">Sil</button>
-          </span></div>`;
-        });
-      }
-      h += `</div>`;
-    }
-    h += `</div>`;
-  });
-
-  h += `</div>
-  <footer class="note">"Ücret Ödendi" butonuna bastığında bugünün tarihi ve o öğrenci için tanımlı ücret otomatik kaydedilir. Fiyat sonradan değişse bile geçmiş ödemeler o günkü tutarıyla kalır. Veriler bu cihaz/tarayıcıda saklanır — düzenli olarak "Yedekle" ile dosyaya kaydetmeniz önerilir.</footer>`;
-
+  const age = backupAgeDays();
+  if(students.length && (age===null || age>=12)){
+    h += `<div class="banner info">${age===null? 'Henüz yedek alınmadı.' : `Son yedek ${age} gün önce alındı.`} Veriler bu tarayıcıda durur — düzenli indirin.</div>`;
+  }
+  h += viewHome(g);
+  h += `<footer class="note">Veriler bu cihazda saklanır. Yedek dosyası öğrenci, ödeme, taksit, gider ve diğer gelirlerin tamamını içerir.</footer>`;
   app.innerHTML = h;
+  renderModals();
+  renderToast();
+}
+
+function renderModals(){
+  if(detailStudentId) renderDetailModal();   // dosya sayfası en altta kalır
   if(addModalOpen) renderAddModal();
   if(editingStudentId) renderEditModal();
   if(editingPaymentId) renderEditPaymentModal();
   if(installmentModalStudentId) renderInstallmentModal();
   if(editingInstallmentId) renderEditInstallmentModal();
   if(creditModalStudentId) renderCreditModal();
+  if(collectState) renderCollectModal();
+  if(expenseModal) renderExpenseModal();
+  if(incomeModal) renderIncomeModal();
+  if(settingsOpen) renderSettingsModal();
   if(textBackupOpen) renderTextBackupModal();
   if(textImportOpen) renderTextImportModal();
+  if(pinModalOpen) renderPinModal();
   if(confirmState) renderConfirmModal();
   if(alertState) renderAlertModal();
 }
 
-function onSearch(v){ searchQ=v; render(); const el=document.querySelector('.toolbar input'); if(el){ el.focus(); el.setSelectionRange(v.length,v.length);} }
-function toggleHist(sid){ expanded[sid] = !expanded[sid]; render(); }
-function toggleAllHistory(){ allHistoryOpen = !allHistoryOpen; render(); }
-function toggleExpenses(){ expensesOpen = !expensesOpen; render(); }
-function setExpenseTab(tab){ expenseTab = tab; render(); }
-const MONTH_SHORT = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
-function currentMonthKey(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; }
-function currentMonthExpenseTotal(){ const month=currentMonthKey(); return EXPENSE_CATEGORIES.reduce((s,c)=>s+(Number(getExpense(month,c.key))||0),0); }
-function getExpense(month, cat){ const e = expenses.find(x=>x.month===month && x.category===cat); return e ? e.amount : ''; }
-function saveMonthlyExpenses(){
-  const month = currentMonthKey();
-  EXPENSE_CATEGORIES.forEach(c=>{
-    const el = document.getElementById('exp_'+c.key);
-    const val = Number(el.value)||0;
-    let e = expenses.find(x=>x.month===month && x.category===c.key);
-    if(e){ e.amount = val; }
-    else{ expenses.push({id:uid(), month, category:c.key, amount:val, createdAt:new Date().toISOString()}); }
-  });
-  saveList('coach_expenses_v1', expenses);
-  expensesOpen = false;
-  expenseCalendarOpen = false;
+/* ===================== ANA EKRAN ===================== */
+function togglePanel(k){ panelOpen[k] = !panelOpen[k]; render(); }
+/* kayıt sonrası açık alt sekmeleri kapatıp ana ekrana dön */
+function closePanels(){
+  panelOpen = {gider:false, rapor:false, odemeler:false, taksit:false};
+  otherPaymentsOpen = false;
+  monthOpen = {};
   render();
+  try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ if(window.scrollTo) window.scrollTo(0,0); }
 }
-function categoryTotal(cat){ return expenses.filter(e=>e.category===cat).reduce((s,e)=>s+Number(e.amount||0),0); }
-function monthExpenseTotal(monthKey){
-  return expenses.filter(e=>e.month===monthKey).reduce((s,e)=>s+Number(e.amount||0),0);
+function statCard(label, value, o){
+  o = o||{};
+  return `<div class="stat ${o.click?'tappable':''}" ${o.click? `onclick="${o.click}"`:''}>
+    <div class="label">${label}</div>
+    <div class="value ${o.tone||''}"${o.small? ' style="font-size:22px;"':''}>${value}</div>
+    ${o.sub? `<div class="substat">${o.sub}</div>`:''}
+    ${o.sub2? `<div class="substat">${o.sub2}</div>`:''}
+  </div>`;
 }
-function toggleExpenseCalendar(){ expenseCalendarOpen = !expenseCalendarOpen; render(); }
-function changeExpenseCalendarYear(delta){ expenseCalendarYear += delta; render(); }
-function renderExpenseCalendarGrid(){
-  const now = new Date();
-  const isCurrentYear = expenseCalendarYear === now.getFullYear();
-  let cells = '';
-  for(let i=0;i<12;i++){
-    const mk = `${expenseCalendarYear}-${String(i+1).padStart(2,'0')}`;
-    const total = monthExpenseTotal(mk);
-    const isThisMonthCell = isCurrentYear && i===now.getMonth();
-    cells += `<div class="exp-cal-cell ${isThisMonthCell?'exp-cal-cell-active':''}">
-      <div class="exp-cal-month">${MONTH_SHORT[i]}</div>
-      <div class="exp-cal-amount">${fmtMoney(total)}</div>
-    </div>`;
+function viewHome(g){
+  const pct = g.expected>0 ? Math.round(g.inc.student/g.expected*100) : 0;
+  const expCount = expenses.filter(e=>inMonth(e.date,g.mk)).length;
+  let h = `<div class="grid-stats">
+    ${statCard('Bu ay ödeyen', g.paidCount, {tone:'green'})}
+    ${statCard('Bu ay ödemeyen', g.unpaid.length, {tone:g.unpaid.length?'red':'', click:'goUnpaidList()'})}
+    ${statCard('Öğrenci', students.length, {})}
+    ${statCard('Bu ay tahsilat', fmtMoney(g.inc.total), {small:true, tone:'green', sub:`Öğrenci ${fmtMoney(g.inc.student)}`, sub2:`Diğer ${fmtMoney(g.inc.other)}`})}
+    ${statCard('Bu ay gider', fmtMoney(g.exp), {small:true, tone:'red', sub:`${expCount} işlem · ${panelOpen.gider?'gizle':'aç'}`, click:"togglePanel('gider')"})}
+    ${statCard('Bu ay net', fmtMoney(g.net), {small:true, tone:g.net>=0?'green':'red', sub:`Beklenen ${fmtMoney(g.expected)} · %${pct}`, click:"togglePanel('rapor')"})}
+    ${statCard('Toplam tahsilat', fmtMoney(g.totalAll+g.otherAll), {small:true, tone:'green', sub:`Ödeme kayıtları · ${panelOpen.odemeler?'gizle':'aç'}`, click:"togglePanel('odemeler')"})}
+    ${statCard('Bekleyen taksit', fmtMoney(g.pendingTotal), {small:true, sub:`${g.pending.length} açık`, click:"togglePanel('taksit')"})}
+  </div>`;
+
+  if(g.overdue.length){
+    h += `<div class="banner danger"><b>${g.overdue.length} taksit gecikti</b> — toplam ${fmtMoney(g.overdue.reduce((s,i)=>s+Number(i.amount||0),0))}. ${esc(g.overdue.slice(0,3).map(i=>memberNameOf(i.studentId)).join(', '))}${g.overdue.length>3?' ve diğerleri':''}.</div>`;
+  } else if(g.upcoming.length){
+    h += `<div class="banner warn"><b>${g.upcoming.length} taksitin vadesi bu hafta</b> — ${esc(g.upcoming.slice(0,3).map(i=>memberNameOf(i.studentId)+' '+fmtShort(i.dueDate)).join(', '))}.</div>`;
   }
-  return `<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
-    <button class="editbtn" onclick="changeExpenseCalendarYear(-1)">‹</button>
-    <h3 style="margin:0; font-size:15px;">${expenseCalendarYear}</h3>
-    <button class="editbtn" onclick="changeExpenseCalendarYear(1)">›</button>
-  </div>
-  <div class="exp-cal-grid">${cells}</div>`;
-}
-function renderExpensesPanel(){
-  const month = currentMonthKey();
-  const [y,m] = month.split('-').map(Number);
-  const monthLabel = `${MONTH_SHORT[m-1]} ${y}`;
-  let content = '';
-  if(expenseTab==='aylik'){
-    const monthTotalVal = currentMonthExpenseTotal();
-    content = `<p style="font-size:12px;color:var(--muted);margin:0 0 12px;">${monthLabel} için bu ay yapacağın giderleri gir.</p>
-    ${EXPENSE_CATEGORIES.map(c=>`<div class="expense-row"><label>${c.label}</label><input type="number" min="0" id="exp_${c.key}" value="${getExpense(month,c.key)}" placeholder="0"></div>`).join('')}
-    <div class="expense-row" style="border-top:1px solid var(--line); margin-top:4px; padding-top:12px;"><label>Aylık Toplam</label><span style="font-weight:900;">${fmtMoney(monthTotalVal)}</span></div>
-    <button class="primary" style="width:100%; margin-top:14px;" onclick="saveMonthlyExpenses()">Kaydet</button>`;
-  } else {
-    const grand = EXPENSE_CATEGORIES.reduce((s,c)=>s+categoryTotal(c.key),0);
-    content = `<p style="font-size:12px;color:var(--muted);margin:0 0 4px;">Tüm zamanlar toplam gider.</p>
-    ${EXPENSE_CATEGORIES.map(c=>`<div class="expense-row"><label>${c.label}</label><span style="font-weight:900;">${fmtMoney(categoryTotal(c.key))}</span></div>`).join('')}
-    <div class="expense-row" style="border-top:1px solid var(--line); margin-top:4px; padding-top:12px;"><label>Genel Toplam</label><span style="font-weight:900; color:var(--red);">${fmtMoney(grand)}</span></div>`;
+
+  if(panelOpen.gider) h += renderGiderPanel();
+  if(panelOpen.rapor) h += renderRaporPanel();
+  if(panelOpen.odemeler) h += renderOdemelerPanel();
+  if(panelOpen.taksit) h += `<section class="panel"><h2 style="margin-bottom:8px;">Taksit takibi <span class="count">(${g.pending.length} bekleyen · ${fmtMoney(g.pendingTotal)})</span></h2>${renderInstallmentList(g.pending)}</section>`;
+
+  if(g.debtors.length){
+    h += `<section class="panel"><h2 style="margin-bottom:8px;">Kredili öğrenciler <span class="count">(${g.debtors.length} kişi · ${fmtMoney(g.debtorsTotal)})</span></h2>
+    ${g.debtors.map(s=>`<div class="row-item">
+      <div><div class="name">${esc(s.name)}</div><div class="sub">${s.debtDate? fmtDate(s.debtDate)+' tarihinde tanımlandı':''}</div></div>
+      <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--red);font-weight:900;">${fmtMoney(s.debt)}</span>
+      <button class="paidsmall" onclick="openCollect('${s.id}')">Tahsil et</button></div>
+    </div>`).join('')}</section>`;
   }
+
+  h += renderOtherIncomePanel(g);
+  h += viewOgrenciler();
+  return h;
+}
+function renderOtherIncomePanel(g){
+  const sorted = otherIncomes.slice().sort((a,b)=> b.date.localeCompare(a.date));
   return `<section class="panel">
-    <h2 style="margin-bottom:12px;">Giderler</h2>
-    <div class="expense-tabs" style="align-items:center;">
-      <button class="${expenseTab==='aylik'?'primary':'secondary'}" onclick="setExpenseTab('aylik')">Aylık</button>
-      <button class="${expenseTab==='toplam'?'primary':'secondary'}" onclick="setExpenseTab('toplam')">Toplam</button>
-      <div style="margin-left:auto; margin-right:4px; width:130px; display:flex; justify-content:center;">
-        <button onclick="toggleExpenseCalendar()" title="Yıllık Görünüm" aria-label="Yıllık Görünüm" style="background:none; border:none; padding:0; font-size:24px; line-height:1; cursor:pointer;">📅</button>
-      </div>
+    <div class="panel-head" style="cursor:pointer;" onclick="toggleOtherPayments()">
+      <h2>Diğer Gelirler ${otherPaymentsOpen? `<span class="count">(${sorted.length} kayıt · ${fmtMoney(g.otherAll)})</span>`:''}</h2>
+      <span class="linklike">${otherPaymentsOpen? 'Gizle':'Göster'}</span>
     </div>
-    ${expenseCalendarOpen ? renderExpenseCalendarGrid() : ''}
-    ${content}
+    ${otherPaymentsOpen ? `
+      <button class="primary" style="width:100%;margin:12px 0 4px;" onclick="openIncomeModal(null, currentMonthKey())">+ Gelir ekle</button>
+      ${sorted.length ? sorted.map(o=>`<div class="tx-row">
+          <div class="d">${fmtShort(o.date)}</div>
+          <div class="t"><div class="c">${esc(o.source||'Diğer')}</div>${o.desc? `<div class="n">${esc(o.desc)}</div>`:''}</div>
+          <div class="v" style="color:var(--green);">${fmtMoney(o.amount)}</div>
+          <button class="editbtn" onclick="openIncomeModal('${o.id}')">Düzenle</button>
+          <button class="del" onclick="deleteOtherPayment('${o.id}')">Sil</button>
+        </div>`).join('')
+        : `<div class="empty">Ders dışı gelir kaydı yok. Seminer, danışmanlık gibi gelirleri buraya ekleyin.</div>`}
+    ` : ''}
   </section>`;
 }
-function toggleMonth(key){ monthOpen[key] = !monthOpen[key]; render(); }
-const OTHER_PAYMENT_COLORS = ['#E8A33D','#E32227','#131417','#1F3A5F','#4A4A4F','#8B5A2B'];
-function colorForSource(name){
-  let h = 0;
-  for(let i=0;i<name.length;i++){ h = (h*31 + name.charCodeAt(i)) >>> 0; }
-  return OTHER_PAYMENT_COLORS[h % OTHER_PAYMENT_COLORS.length];
-}
-function renderMonthlyBreakdown(){
-  const months = monthlyBreakdown();
-  if(months.length===0){ return `<div class="empty">Henüz kayıtlı ödeme yok.</div>`; }
-  let out = '';
-  months.forEach(mo=>{
-    out += `<div class="month-row" onclick="toggleMonth('${mo.key}')">
-      <span class="month-label">${mo.label}</span>
-      <span class="month-meta">${mo.items.length} ödeme</span>
-      <span class="month-total mono">${fmtMoney(mo.total)}</span>
-    </div>`;
-    if(monthOpen[mo.key]){
-      out += `<div class="histbox" style="margin-left:0;">`;
-      mo.items.forEach(p=>{
-        if(p.kind==='other'){
-          const srcName = p.source || 'Diğer';
-          out += `<div class="hrow" style="align-items:flex-start;"><span style="color:${colorForSource(srcName)}; font-weight:800;">${srcName}</span><span>${fmtDate(p.date)}</span><span>${fmtMoney(p.amount)}</span></div>`;
-          return;
-        }
-        const pendingForStudent = studentInstallments(p.studentId).filter(i=>!i.paid);
-        out += `<div class="hrow" style="align-items:flex-start;"><span style="color:var(--green); font-weight:800;">${memberNameOf(p.studentId)}</span><span>${fmtDate(p.date)}</span><span>${fmtMoney(p.amount)}</span></div>`;
-        if(pendingForStudent.length){
-          out += `<div style="padding:2px 0 6px 4px; font-size:11px; color:var(--paper-muted);">
-            🗓️ ${pendingForStudent.length} bekleyen taksit: ${pendingForStudent.map(i=> fmtMoney(i.amount)+' ('+fmtDate(i.dueDate)+')').join(', ')}
-          </div>`;
-        }
-      });
-      out += `</div>`;
-    }
-  });
-  return out;
-}
-function memberNameOf(sid){ const s = students.find(x=>x.id===sid); return s ? s.name : '(silinmiş öğrenci)'; }
 function toggleOtherPayments(){ otherPaymentsOpen = !otherPaymentsOpen; render(); }
-function addOtherPayment(){
-  const amountEl = document.getElementById('op_amount');
-  const sourceEl = document.getElementById('op_source');
-  const amount = Number(amountEl.value);
-  const source = sourceEl.value.trim();
-  if(!amount || amount<=0){ showAlert('Lütfen geçerli bir ödeme tutarı girin.'); return; }
-  if(!source){ showAlert('Lütfen ödemenin alındığı yerin ismini girin.'); return; }
-  otherIncomes.push({id:uid(), amount, source, date:todayStr(), createdAt:new Date().toISOString()});
-  saveList('coach_other_income_v1', otherIncomes);
+function goUnpaidList(){
+  filterMode='unpaid'; render();
+  const el = document.getElementById('studentList');
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function renderOdemelerPanel(){
+  const months = allMonths();
+  return `<section class="panel"><h2 style="margin-bottom:8px;">Tüm ödemeler <span class="count">(${payments.length + otherIncomes.length} kayıt)</span></h2>
+  ${months.length? months.map(mk=>{
+    const inc = monthIncome(mk);
+    return `<div class="row-item" style="cursor:pointer;" onclick="toggleMonth('${mk}')">
+      <div><div class="name">${esc(monthLabel(mk))}</div><div class="sub">${payments.filter(p=>inMonth(p.date,mk)).length + otherIncomes.filter(o=>inMonth(o.date,mk)).length} kayıt</div></div>
+      <div style="font-weight:900;">${fmtMoney(inc.total)}</div>
+    </div>${monthOpen[mk]? monthDetailHtml(mk):''}`;
+  }).join('') : `<div class="empty">Henüz ödeme kaydı yok.</div>`}
+  </section>`;
+}
+
+/* ===================== ÖĞRENCİLER ===================== */
+function filteredStudents(){
+  const mk = currentMonthKey();
+  const q = searchQ.trim().toLocaleLowerCase('tr');
+  let list = students.filter(s=>{
+    if(q && !(s.name||'').toLocaleLowerCase('tr').includes(q) && !(s.phone||'').includes(q)) return false;
+    if(filterMode==='unpaid') return !paidInMonth(s.id, mk);
+    if(filterMode==='overdue') return hasOverdue(s.id);
+    if(filterMode==='debt') return Number(s.debt)>0;
+    if(filterMode==='never') return studentPayments(s.id).length===0;
+    return true;
+  });
+  const lastDate = s=>{ const p=studentPayments(s.id)[0]; return p? p.date : '0000-00-00'; };
+  if(sortMode==='name') list.sort((a,b)=>a.name.localeCompare(b.name,'tr'));
+  if(sortMode==='last') list.sort((a,b)=> lastDate(b).localeCompare(lastDate(a)));
+  if(sortMode==='debt') list.sort((a,b)=> (Number(b.debt)||0)-(Number(a.debt)||0));
+  if(sortMode==='overdue') list.sort((a,b)=> (hasOverdue(b)?1:0)-(hasOverdue(a)?1:0) || a.name.localeCompare(b.name,'tr'));
+  return list;
+}
+function viewOgrenciler(){
+  const chip = (k,l)=>`<button class="chip ${filterMode===k?'on':''}" onclick="setFilter('${k}')">${l}</button>`;
+  return `<div class="toolbar">
+    <input type="text" id="searchInput" placeholder="Öğrenci ara…" value="${esc(searchQ)}" oninput="onSearch(this.value)">
+    <button class="primary" onclick="openAddModal()">+ Kişi ekle</button>
+  </div>
+  <div class="chips">
+    ${chip('all','Tümü')}${chip('unpaid','Bu ay ödemeyen')}${chip('overdue','Geciken')}${chip('debt','Kredili')}${chip('never','Kayıtsız')}
+    <select class="sortsel" onchange="setSort(this.value)">
+      <option value="name" ${sortMode==='name'?'selected':''}>İsme göre</option>
+      <option value="last" ${sortMode==='last'?'selected':''}>Son ödemeye göre</option>
+      <option value="debt" ${sortMode==='debt'?'selected':''}>Borca göre</option>
+      <option value="overdue" ${sortMode==='overdue'?'selected':''}>Gecikmeye göre</option>
+    </select>
+  </div>
+  <div class="student-list" id="studentList">${studentListHtml()}</div>`;
+}
+function studentListHtml(){
+  const list = filteredStudents();
+  if(!students.length) return `<div class="panel"><div class="empty" style="text-align:center;">Henüz öğrenci yok. “+ Kişi ekle” ile başlayın; ders ücretini girdiğinizde tahsilat tek dokunuşa iner.</div></div>`;
+  if(!list.length) return `<div class="panel"><div class="empty" style="text-align:center;">Bu filtreye uyan öğrenci yok.</div></div>`;
+  return list.map(s=>{
+    const hist = studentPayments(s.id);
+    const last = hist[0];
+    const paidNow = last && isThisMonth(last.date);
+    let badge = `<span class="badge never">Kayıt yok</span>`;
+    if(last) badge = paidNow ? `<span class="badge paid">Bu ay ödedi</span>` : `<span class="badge unpaid">Bu ay ödemedi</span>`;
+    const pend = studentInstallments(s.id).filter(i=>!i.paid);
+    const over = pend.filter(i=>installmentStatus(i)==='overdue');
+    const sub = [
+      fmtMoney(s.price)+' ders ücreti',
+      s.lessonDay ? esc(s.lessonDay) : null,
+      (s.rhythm==='paket' && s.packageRemaining!=null) ? `${s.packageRemaining} ders kaldı` : null
+    ].filter(Boolean).join(' · ');
+    return `<div class="student-card">
+      <div class="student-card-top" onclick="openDetail('${s.id}')">
+        <span class="avatar">${esc(initials(s.name))}</span>
+        <div class="student-card-info">
+          <div class="student-card-name">${esc(s.name)}</div>
+          <div class="student-card-sub">${sub}</div>
+        </div>
+        ${badge}
+      </div>
+      ${last? `<div class="student-card-last">Son ödeme: ${fmtDate(last.date)} · ${fmtMoney(last.amount)}</div>`:''}
+      ${(over.length || Number(s.debt)>0) ? `<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+        ${over.length? `<span class="badge unpaid">${over.length} taksit gecikti</span>`:''}
+        ${Number(s.debt)>0? `<span class="badge debt">Borç ${fmtMoney(s.debt)}</span>`:''}
+        ${pend.length && !over.length? `<span class="badge pending2">${pend.length} taksit bekliyor</span>`:''}
+      </div>`:''}
+      <div class="cardactions">
+        <button class="paidbtn" onclick="openCollect('${s.id}')">Tahsil et</button>
+        <button class="editbtn" onclick="openDetail('${s.id}')">Dosya</button>
+        <div class="spacer"></div>
+        <button class="editbtn" onclick="openStudentMenu(event,'${s.id}')" aria-label="Diğer işlemler">⋯</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function onSearch(v){
+  searchQ = v;
+  const el = document.getElementById('studentList');
+  if(el) el.innerHTML = studentListHtml(); else render();
+}
+function setFilter(k){ filterMode = k; render(); }
+function setSort(v){ sortMode = v; render(); }
+
+function openStudentMenu(ev, sid){
+  ev.stopPropagation();
+  const wasOpenFor = menuState && menuState.sid;
+  if(menuState) closeMenu();
+  if(wasOpenFor === sid) return;   // aynı butona ikinci basış menüyü kapatır
+  const r = ev.currentTarget.getBoundingClientRect();
+  const sx = window.pageXOffset || document.documentElement.scrollLeft || 0;
+  const sy = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const vw = document.documentElement.clientWidth || window.innerWidth;
+  // belge koordinatları: menü sayfayla birlikte kayar
+  menuState = {x: Math.max(8, Math.min(r.left, vw-210)) + sx, y: r.bottom + 6 + sy, yTop: r.top + sy, sid};
+  renderMenu();
+}
+function closeMenu(){ menuState=null; const m=document.getElementById('ctxMenu'); if(m) m.remove(); document.removeEventListener('click', closeMenu); }
+function renderMenu(){
+  const ex = document.getElementById('ctxMenu'); if(ex) ex.remove();
+  if(!menuState) return;
+  const sid = menuState.sid;
+  const d = document.createElement('div');
+  d.id='ctxMenu'; d.className='menu';
+  d.style.left = menuState.x+'px'; d.style.top = menuState.y+'px';
+  d.innerHTML = `
+    <button onclick="closeMenu();openEditModal('${sid}')">Bilgileri düzenle</button>
+    <button onclick="closeMenu();openInstallmentModal('${sid}')">Taksit planla</button>
+    <button onclick="closeMenu();openCreditModal('${sid}')">Kredi (eksi bakiye) tanımla</button>
+    <button onclick="closeMenu();printStatement('${sid}')">Ekstre yazdır</button>
+    <button class="danger" onclick="closeMenu();deleteStudent('${sid}')">Öğrenciyi sil</button>`;
+  document.body.appendChild(d);
+  ensureMenuVisible(d);
+  setTimeout(()=>document.addEventListener('click', closeMenu), 0);
+}
+/* Menü ekranın altına taşıyorsa sayfayı kadarınca yukarı kaydır;
+   kaydıracak yer yoksa menüyü butonun üstüne aç. */
+function ensureMenuVisible(d){
+  if(!menuState) return;
+  const h = d.offsetHeight || 220;
+  const vh = window.innerHeight || (document.documentElement && document.documentElement.clientHeight) || 0;
+  const sy = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const docH = Math.max(
+    document.documentElement ? document.documentElement.scrollHeight : 0,
+    document.body ? document.body.scrollHeight : 0
+  );
+  const margin = 12;
+  const overflow = (menuState.y + h) - (sy + vh - margin);
+  if(overflow <= 0) return;
+  const canScroll = Math.max(0, docH - vh - sy);
+  if(canScroll >= overflow){
+    scrollByY(overflow);
+    return;
+  }
+  const above = menuState.yTop - 6 - h;
+  if(above >= sy + margin){
+    menuState.y = above;
+    d.style.top = above+'px';
+    return;
+  }
+  if(canScroll > 0) scrollByY(canScroll);
+}
+function scrollByY(dy){
+  try{ window.scrollBy({top:dy, behavior:'smooth'}); }
+  catch(e){ if(window.scrollBy) window.scrollBy(0, dy); }
+}
+
+/* ===================== ÖĞRENCİ DOSYASI ===================== */
+function openDetail(sid){ detailStudentId = sid; detailTab='ozet'; render(); }
+function closeDetail(){ detailStudentId=null; const o=document.getElementById('detailOverlay'); if(o) o.remove(); render(); }
+function setDetailTab(t){ detailTab=t; renderDetailModal(); }
+function renderDetailModal(){
+  const s = students.find(x=>x.id===detailStudentId);
+  if(!s){ detailStudentId=null; return; }
+  const ex = document.getElementById('detailOverlay'); if(ex) ex.remove();
+  const hist = studentPayments(s.id);
+  const inst = studentInstallments(s.id);
+  const total = studentTotal(s.id);
+  const monthsPaid = new Set(payments.filter(p=>p.studentId===s.id).map(p=>monthKey(p.date))).size;
+  const div = document.createElement('div');
+  div.id='detailOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeDetail(); };
+
+  let body = '';
+  if(detailTab==='ozet'){
+    const rows = [
+      ['Ders ücreti', fmtMoney(s.price)],
+      ['Ödeme düzeni', s.rhythm==='paket'?'Paket':(s.rhythm==='taksit'?'Taksitli':'Aylık')],
+      ['Ders günü', s.lessonDay? esc(s.lessonDay) : '—'],
+      ['Telefon', s.phone? `<a href="tel:${esc(s.phone)}" style="color:var(--blue);font-weight:800;text-decoration:none;">${esc(s.phone)}</a>` : '—'],
+      ['Toplam ödediği', `${fmtMoney(total)} <span style="color:var(--muted);font-weight:700;">(${monthsPaid} ay)</span>`],
+      ['Açık borç', Number(s.debt)>0 ? `<span style="color:var(--red);">${fmtMoney(s.debt)}</span>` : '—'],
+      ['Bekleyen taksit', inst.filter(i=>!i.paid).length ? `${inst.filter(i=>!i.paid).length} adet · ${fmtMoney(inst.filter(i=>!i.paid).reduce((a,i)=>a+Number(i.amount||0),0))}` : '—']
+    ];
+    if(s.rhythm==='paket'){
+      rows.push(['Paket', `${s.packageRemaining||0} / ${s.packageTotal||0} ders kaldı`]);
+    }
+    body = rows.map(r=>`<div class="row-item"><span class="sub" style="font-weight:800;">${r[0]}</span><span style="font-weight:800;">${r[1]}</span></div>`).join('');
+    if(s.rhythm==='paket'){
+      body += `<div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="secondary" style="flex:1;" onclick="useLesson('${s.id}')">Ders işle (−1)</button>
+        <button class="secondary" style="flex:1;" onclick="addLessons('${s.id}')">Ders hakkı ekle</button></div>`;
+    }
+    if(s.note){ body += `<div class="histbox" style="margin-top:12px;"><div class="sub" style="font-weight:800;margin-bottom:4px;">Not</div><div style="font-size:13px;font-weight:600;white-space:pre-wrap;">${esc(s.note)}</div></div>`; }
+  }
+  if(detailTab==='odeme'){
+    body = hist.length ? `<div class="histbox">${hist.map(p=>`<div class="hrow">
+      <span class="grow">${fmtDate(p.date)}${p.note? ' · '+esc(p.note):''}</span>
+      <span>${fmtMoney(p.amount)}</span>
+      <span style="display:flex;gap:8px;"><button class="linklike" onclick="openEditPaymentModal('${p.id}')">Düzenle</button><button class="del" onclick="deletePayment('${p.id}')">Sil</button></span>
+    </div>`).join('')}</div>` : `<div class="empty">Henüz ödeme kaydı yok. “Tahsil et” ile ilk tahsilatı girin.</div>`;
+  }
+  if(detailTab==='taksit'){
+    body = inst.length ? `<div class="histbox">${inst.map(i=>{
+      const st = installmentStatus(i);
+      return `<div class="hrow"><span class="grow">${fmtDate(i.dueDate)}${i.note? ' · '+esc(i.note):''}</span><span>${fmtMoney(i.amount)}</span>
+      <span style="display:flex;gap:8px;align-items:center;"><span class="badge ${statusClass(st)}" style="font-size:10px;">${statusLabel(st)}</span>
+      ${!i.paid? `<button class="linklike" onclick="markInstallmentPaid('${i.id}')">Ödendi</button>`:''}
+      <button class="linklike" onclick="openEditInstallmentModal('${i.id}')">Düzenle</button>
+      <button class="del" onclick="deleteInstallment('${i.id}')">Sil</button></span></div>`;
+    }).join('')}</div>` : `<div class="empty">Taksit planı yok.</div>`;
+    body += `<button class="secondary" style="width:100%;margin-top:10px;" onclick="openInstallmentModal('${s.id}')">Taksit planla</button>`;
+  }
+
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;">
+      <span class="avatar">${esc(initials(s.name))}</span>
+      <div style="flex:1;min-width:0;"><h3 style="margin:0;">${esc(s.name)}</h3>
+      <div class="sub" style="color:var(--muted);font-size:11.5px;font-weight:700;">${fmtMoney(s.price)} · ${s.rhythm==='paket'?'Paket':(s.rhythm==='taksit'?'Taksitli':'Aylık')}</div></div>
+      <button class="editbtn" onclick="closeDetail()">Kapat</button>
+    </div>
+    <div class="tabs" style="margin-bottom:12px;">
+      <button class="${detailTab==='ozet'?'on':''}" onclick="setDetailTab('ozet')">Özet</button>
+      <button class="${detailTab==='odeme'?'on':''}" onclick="setDetailTab('odeme')">Ödemeler (${hist.length})</button>
+      <button class="${detailTab==='taksit'?'on':''}" onclick="setDetailTab('taksit')">Taksitler (${inst.length})</button>
+    </div>
+    ${body}
+    <div class="modal-actions">
+      <button class="secondary" onclick="openEditModal('${s.id}')">Düzenle</button>
+      <button class="secondary" onclick="printStatement('${s.id}')">Ekstre</button>
+      <button class="primary" onclick="openCollect('${s.id}')">Tahsil et</button>
+    </div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function useLesson(sid){
+  const s = students.find(x=>x.id===sid); if(!s) return;
+  if(!s.packageRemaining){ showAlert('Kalan ders hakkı yok. Önce ders hakkı ekleyin.'); return; }
+  withUndo('1 ders işlendi.', ()=>{ s.packageRemaining = Number(s.packageRemaining)-1; saveStudents(); });
   render();
 }
-function deleteOtherPayment(id){
-  askConfirm('Bu ödeme kaydı silinecek.', ()=>{
-    otherIncomes = otherIncomes.filter(o=>o.id!==id);
-    saveList('coach_other_income_v1', otherIncomes);
-    render();
+function addLessons(sid){
+  const s = students.find(x=>x.id===sid); if(!s) return;
+  const n = Number(prompt('Kaç ders hakkı eklensin?','8'));
+  if(!n || n<=0) return;
+  s.packageRemaining = (Number(s.packageRemaining)||0)+n;
+  s.packageTotal = (Number(s.packageTotal)||0)+n;
+  saveStudents(); render();
+}
+
+/* ===================== TAHSİLAT ===================== */
+function openCollect(sid){
+  const s = students.find(x=>x.id===sid); if(!s) return;
+  const pend = studentInstallments(sid).filter(i=>!i.paid);
+  collectState = {
+    sid,
+    date: todayStr(),
+    amount: s.price || '',
+    installmentId: '',
+    debtApply: Number(s.debt)>0 ? Math.min(Number(s.debt), Number(s.price)||0) : 0,
+    lessons: s.rhythm==='paket' ? '' : '',
+    note: '',
+    pend
+  };
+  render();
+}
+function closeCollect(){ collectState=null; const o=document.getElementById('collectOverlay'); if(o) o.remove(); }
+function syncCollect(){
+  if(!collectState) return;
+  const g = id => document.getElementById(id);
+  if(g('c_date')) collectState.date = g('c_date').value;
+  if(g('c_amount')) collectState.amount = g('c_amount').value;
+  if(g('c_inst')) collectState.installmentId = g('c_inst').value;
+  if(g('c_debt')) collectState.debtApply = g('c_debt').value;
+  if(g('c_lessons')) collectState.lessons = g('c_lessons').value;
+  if(g('c_note')) collectState.note = g('c_note').value;
+}
+function onCollectInstChange(){
+  syncCollect();
+  const i = installments.find(x=>x.id===collectState.installmentId);
+  if(i){ collectState.amount = i.amount; }
+  renderCollectModal();
+}
+function renderCollectModal(){
+  if(!collectState) return;
+  const s = students.find(x=>x.id===collectState.sid);
+  if(!s){ collectState=null; return; }
+  const ex = document.getElementById('collectOverlay'); if(ex) ex.remove();
+  const mk = monthKey(collectState.date || todayStr());
+  const already = payments.filter(p=>p.studentId===s.id && inMonth(p.date, mk));
+  const div = document.createElement('div');
+  div.id='collectOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeCollect(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <h3>Tahsilat — ${esc(s.name)}</h3>
+    ${already.length? `<div class="banner warn" style="margin-bottom:12px;">Bu ay ${esc(s.name)} için zaten ${already.length} tahsilat kayıtlı (${already.map(p=>fmtMoney(p.amount)).join(', ')}). Yine de eklemek istiyorsanız devam edin.</div>`:''}
+    <div class="twocol">
+      <div class="field"><label>Tarih</label><input type="date" id="c_date" value="${esc(collectState.date)}" onchange="syncCollect();renderCollectModal()"></div>
+      <div class="field"><label>Tutar (₺)</label><input type="number" min="0" inputmode="decimal" id="c_amount" value="${esc(collectState.amount)}"></div>
+    </div>
+    ${collectState.pend.length? `<div class="field"><label>Hangi taksiti kapatıyor?</label>
+      <select id="c_inst" onchange="onCollectInstChange()">
+        <option value="">Taksit değil — normal ders ücreti</option>
+        ${collectState.pend.map(i=>`<option value="${i.id}" ${collectState.installmentId===i.id?'selected':''}>${esc(i.note||'Taksit')} · ${fmtDate(i.dueDate)} · ${fmtMoney(i.amount)}</option>`).join('')}
+      </select></div>`:''}
+    ${Number(s.debt)>0? `<div class="field"><label>Borçtan düşülecek tutar (₺)</label>
+      <input type="number" min="0" inputmode="decimal" id="c_debt" value="${esc(collectState.debtApply)}">
+      <div class="hint">Açık borç ${fmtMoney(s.debt)}. Buraya yazdığınız kadarı borçtan düşülür, kalan tutar normal tahsilat olarak işlenir. Borcu kapatmak istemiyorsanız 0 yazın.</div></div>`:''}
+    ${s.rhythm==='paket'? `<div class="field"><label>Eklenecek ders hakkı (opsiyonel)</label><input type="number" min="0" id="c_lessons" value="${esc(collectState.lessons)}" placeholder="Örn: 8"></div>`:''}
+    <div class="field"><label>Açıklama (opsiyonel)</label><input type="text" id="c_note" value="${esc(collectState.note)}" placeholder="Örn: Ekim ders ücreti"></div>
+    <div class="modal-actions">
+      <button class="secondary" onclick="closeCollect()">Vazgeç</button>
+      <button class="primary" onclick="submitCollect()">Tahsilatı kaydet</button>
+    </div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function submitCollect(){
+  syncCollect();
+  const s = students.find(x=>x.id===collectState.sid); if(!s) return;
+  const amount = Number(collectState.amount||0);
+  const date = collectState.date;
+  if(!date){ showAlert('Tahsilat tarihini girin.'); return; }
+  if(!amount || amount<=0){ showAlert('Geçerli bir tutar girin.'); return; }
+  const debtApply = Math.min(Number(collectState.debtApply||0), Number(s.debt||0), amount);
+  const inst = collectState.installmentId ? installments.find(i=>i.id===collectState.installmentId) : null;
+  const lessons = Number(collectState.lessons||0);
+  const noteParts = [];
+  if(collectState.note) noteParts.push(collectState.note);
+  if(inst) noteParts.push(inst.note || 'Taksit');
+  if(debtApply>0) noteParts.push(`Borçtan düşülen ${fmtMoney(debtApply)}`);
+
+  const snap = snapshot();
+  payments.push({
+    id:uid(), studentId:s.id, amount, date,
+    note: noteParts.join(' · ') || null,
+    installmentId: inst? inst.id : null,
+    debtApplied: debtApply>0? debtApply : null,
+    createdAt:new Date().toISOString()
   });
+  if(inst){ inst.paid = true; inst.paidDate = date; saveInstallments(); }
+  if(debtApply>0){
+    s.debt = Math.max(0, Number(s.debt||0) - debtApply);
+    if(!s.debt){ s.debt = null; s.debtDate = null; }
+    saveStudents();
+  }
+  if(lessons>0){
+    s.packageRemaining = (Number(s.packageRemaining)||0)+lessons;
+    s.packageTotal = (Number(s.packageTotal)||0)+lessons;
+    saveStudents();
+  }
+  savePayments();
+  closeCollect();
+  render();
+  showToast(`${fmtMoney(amount)} tahsilat kaydedildi.`, ()=>restoreSnapshot(snap));
 }
-function toggleOtherHist(){ otherHistOpen = !otherHistOpen; render(); }
-function renderOtherPaymentsPanel(){
-  const sorted = otherIncomes.slice().sort((a,b)=> b.date.localeCompare(a.date));
-  let rows = sorted.map(o=>`<div class="row-item"><span class="name">${o.source || 'Diğer'} <span class="sub" style="font-weight:600;">· ${fmtDate(o.date)}</span></span><span style="display:flex; align-items:center; gap:10px;"><strong>${fmtMoney(o.amount)}</strong><button class="del" onclick="deleteOtherPayment('${o.id}')">Sil</button></span></div>`).join('');
-  if(!sorted.length) rows = `<div class="empty">Henüz ödeme kaydı yok.</div>`;
-  return `<div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
-    <div>
-      <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; font-weight:800;">Ödeme Tutarı (₺)</label>
-      <input type="number" min="0" id="op_amount" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px;">
+
+/* ===================== KASA (gider + diğer gelir) ===================== */
+function renderGiderPanel(){
+  const mk = kasaMonth || currentMonthKey();
+  const monthExp = expenses.filter(e=>inMonth(e.date,mk)).sort((a,b)=> b.date.localeCompare(a.date));
+  const prev = addMonths(mk,-1), lastYear = addMonths(mk,-12);
+  const expNow = monthExpense(mk), expPrev = monthExpense(prev), expLast = monthExpense(lastYear);
+  const diff = expPrev>0 ? Math.round((expNow-expPrev)/expPrev*100) : null;
+  let cells = '';
+  for(let i=0;i<12;i++){
+    const k = `${kasaYear}-${String(i+1).padStart(2,'0')}`;
+    const t = monthExpense(k);
+    cells += `<button class="cal-cell ${k===mk?'on':''} ${k===currentMonthKey()?'today':''}" onclick="setKasaMonth('${k}')">
+      <div class="m">${MONTH_SHORT[i]}</div><div class="a">${t? fmtMoney(t):'—'}</div></button>`;
+  }
+  const catTotals = expenseCats.map(c=>({...c, total: expenses.filter(e=>inMonth(e.date,mk) && e.category===c.key).reduce((s,e)=>s+Number(e.amount||0),0)}))
+    .filter(c=>c.total>0).sort((a,b)=>b.total-a.total);
+
+  let h = `<section class="panel">
+    <div class="panel-head" style="margin-bottom:10px;">
+      <button class="editbtn" onclick="changeKasaYear(-1)">‹</button>
+      <h2>Giderler · ${kasaYear}</h2>
+      <button class="editbtn" onclick="changeKasaYear(1)">›</button>
     </div>
-    <div>
-      <label style="display:block; font-size:11px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; font-weight:800;">Ödemenin Alındığı Yer</label>
-      <input type="text" id="op_source" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px;" onkeydown="if(event.key==='Enter'){addOtherPayment()}">
+    <div class="cal-grid">${cells}</div>
+    <div class="panel-head">
+      <h2>${esc(monthLabel(mk))}</h2>
+      <button class="primary" style="padding:9px 14px;" onclick="openExpenseModal(null,'${mk}')">+ Gider ekle</button>
     </div>
-    <button class="primary" style="width:100%;" onclick="addOtherPayment()">Ekle</button>
-  </div>
-  <span class="hist-toggle" onclick="toggleOtherHist()">${otherHistOpen ? 'Geçmişi Gizle' : 'Geçmiş ('+sorted.length+')'}</span>
-  ${otherHistOpen ? `<div class="histbox" style="margin-top:8px;">${rows}</div>` : ''}`;
+    <div class="row-item" style="border-bottom:none;">
+      <div><div class="name" style="font-size:20px;">${fmtMoney(expNow)}</div>
+      <div class="sub">Geçen ay ${fmtMoney(expPrev)}${diff!==null? ` (${diff>0?'+':''}${diff}%)`:''} · geçen yıl bu ay ${fmtMoney(expLast)}</div></div>
+    </div>`;
+  h += monthExp.length ? monthExp.map(e=>`<div class="tx-row">
+      <div class="d">${fmtShort(e.date)}</div>
+      <div class="t"><div class="c">${esc(catLabel(e.category))}</div>${e.desc? `<div class="n">${esc(e.desc)}</div>`:''}</div>
+      <div class="v">${fmtMoney(e.amount)}</div>
+      <button class="editbtn" onclick="openExpenseModal('${e.id}')">Düzenle</button>
+      <button class="del" onclick="deleteExpense('${e.id}')">Sil</button>
+    </div>`).join('')
+    : `<div class="empty">Bu ay gider kaydı yok. Kira, fatura, ulaşım gibi harcamaları tek tek girin — aynı aya istediğiniz kadar kayıt ekleyebilirsiniz.</div>`;
+  if(catTotals.length){
+    h += `<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);">
+      ${catTotals.map(c=>`<div class="row-item"><span class="sub" style="font-weight:800;">${esc(c.label)}</span><span style="font-weight:900;">${fmtMoney(c.total)}</span></div>`).join('')}</div>`;
+  }
+  h += `<div style="margin-top:12px;"><button class="linklike" onclick="addCategory()">+ Yeni kategori ekle</button></div></section>`;
+  return h;
 }
+function setKasaMonth(mk){ kasaMonth = mk; render(); }
+function changeKasaYear(d){ kasaYear += d; render(); }
+function addCategory(){
+  const name = (prompt('Yeni gider kategorisi:')||'').trim();
+  if(!name) return;
+  const key = 'c_'+uid();
+  expenseCats.push({key, label:name});
+  saveList(KEYS.cats, expenseCats);
+  render();
+}
+function openExpenseModal(id, mk){
+  const e = id ? expenses.find(x=>x.id===id) : null;
+  expenseModal = e ? {...e} : {id:null, date: (mk && mk!==currentMonthKey()) ? mk+'-01' : todayStr(), category: expenseCats[0].key, amount:'', desc:''};
+  render();
+}
+function closeExpenseModal(){ expenseModal=null; const o=document.getElementById('expOverlay'); if(o) o.remove(); }
+function renderExpenseModal(){
+  const ex = document.getElementById('expOverlay'); if(ex) ex.remove();
+  const m = expenseModal;
+  const div = document.createElement('div'); div.id='expOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeExpenseModal(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <h3>${m.id? 'Gideri düzenle':'Gider ekle'}</h3>
+    <div class="twocol">
+      <div class="field"><label>Tarih</label><input type="date" id="x_date" value="${esc(m.date)}"></div>
+      <div class="field"><label>Tutar (₺)</label><input type="number" min="0" inputmode="decimal" id="x_amount" value="${esc(m.amount)}"></div>
+    </div>
+    <div class="field"><label>Kategori</label><select id="x_cat">${expenseCats.map(c=>`<option value="${esc(c.key)}" ${m.category===c.key?'selected':''}>${esc(c.label)}</option>`).join('')}</select></div>
+    <div class="field"><label>Açıklama (opsiyonel)</label><input type="text" id="x_desc" value="${esc(m.desc||'')}" placeholder="Örn: Ekim elektrik"></div>
+    <div class="modal-actions">
+      <button class="secondary" onclick="closeExpenseModal()">Vazgeç</button>
+      <button class="primary" onclick="submitExpense()">Kaydet</button>
+    </div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function submitExpense(){
+  const date = document.getElementById('x_date').value;
+  const amount = Number(document.getElementById('x_amount').value||0);
+  const category = document.getElementById('x_cat').value;
+  const desc = document.getElementById('x_desc').value.trim();
+  if(!date){ showAlert('Tarih girin.'); return; }
+  if(!amount || amount<=0){ showAlert('Geçerli bir tutar girin.'); return; }
+  if(expenseModal.id){
+    const e = expenses.find(x=>x.id===expenseModal.id);
+    if(e){ e.date=date; e.amount=amount; e.category=category; e.desc=desc; }
+  } else {
+    expenses.push({id:uid(), date, amount, category, desc, createdAt:new Date().toISOString()});
+  }
+  saveExpenses();
+  kasaMonth = monthKey(date); kasaYear = Number(date.slice(0,4));
+  closeExpenseModal(); closePanels();
+}
+function deleteExpense(id){
+  const e = expenses.find(x=>x.id===id); if(!e) return;
+  withUndo(`${fmtMoney(e.amount)} gider silindi.`, ()=>{ expenses = expenses.filter(x=>x.id!==id); saveExpenses(); });
+  render();
+}
+function openIncomeModal(id, mk){
+  const o = id ? otherIncomes.find(x=>x.id===id) : null;
+  incomeModal = o ? {...o} : {id:null, date:(mk && mk!==currentMonthKey())? mk+'-01' : todayStr(), amount:'', source:'', desc:''};
+  render();
+}
+function closeIncomeModal(){ incomeModal=null; const o=document.getElementById('incOverlay'); if(o) o.remove(); }
+function renderIncomeModal(){
+  const ex = document.getElementById('incOverlay'); if(ex) ex.remove();
+  const m = incomeModal;
+  const div = document.createElement('div'); div.id='incOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeIncomeModal(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <h3>${m.id? 'Geliri düzenle':'Diğer gelir ekle'}</h3>
+    <div class="twocol">
+      <div class="field"><label>Tarih</label><input type="date" id="y_date" value="${esc(m.date)}"></div>
+      <div class="field"><label>Tutar (₺)</label><input type="number" min="0" inputmode="decimal" id="y_amount" value="${esc(m.amount)}"></div>
+    </div>
+    <div class="field"><label>Nereden</label><input type="text" id="y_source" value="${esc(m.source||'')}" placeholder="Örn: Seminer"></div>
+    <div class="field"><label>Açıklama (opsiyonel)</label><input type="text" id="y_desc" value="${esc(m.desc||'')}"></div>
+    <div class="modal-actions">
+      <button class="secondary" onclick="closeIncomeModal()">Vazgeç</button>
+      <button class="primary" onclick="submitIncome()">Kaydet</button>
+    </div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function submitIncome(){
+  const date = document.getElementById('y_date').value;
+  const amount = Number(document.getElementById('y_amount').value||0);
+  const source = document.getElementById('y_source').value.trim();
+  const desc = document.getElementById('y_desc').value.trim();
+  if(!date){ showAlert('Tarih girin.'); return; }
+  if(!amount || amount<=0){ showAlert('Geçerli bir tutar girin.'); return; }
+  if(!source){ showAlert('Gelirin kaynağını yazın.'); return; }
+  if(incomeModal.id){
+    const o = otherIncomes.find(x=>x.id===incomeModal.id);
+    if(o){ o.date=date; o.amount=amount; o.source=source; o.desc=desc; }
+  } else {
+    otherIncomes.push({id:uid(), date, amount, source, desc, createdAt:new Date().toISOString()});
+  }
+  saveOther();
+  kasaMonth = monthKey(date); kasaYear = Number(date.slice(0,4));
+  closeIncomeModal(); closePanels();
+}
+function deleteOtherPayment(id){
+  const o = otherIncomes.find(x=>x.id===id); if(!o) return;
+  withUndo(`${fmtMoney(o.amount)} gelir silindi.`, ()=>{ otherIncomes = otherIncomes.filter(x=>x.id!==id); saveOther(); });
+  render();
+}
+
+/* ===================== RAPOR ===================== */
+function renderRaporPanel(){
+  const months = allMonths();
+  return `<section class="panel">
+    <h2 style="margin-bottom:10px;">Aylık özet</h2>
+    ${months.length? months.map(mk=>{
+      const inc = monthIncome(mk), ex = monthExpense(mk), net = inc.total-ex;
+      const unpaidN = students.length ? unpaidStudents(mk).length : 0;
+      return `<div class="row-item" style="cursor:pointer;" onclick="toggleMonth('${mk}')">
+        <div><div class="name">${esc(monthLabel(mk))}</div>
+        <div class="sub">Tahsilat ${fmtMoney(inc.total)} · gider ${fmtMoney(ex)}${mk===currentMonthKey()? ` · ${unpaidN} kişi bekliyor`:''}</div></div>
+        <div style="font-weight:900;color:${net>=0?'var(--green)':'var(--red)'};">${fmtMoney(net)}</div>
+      </div>${monthOpen[mk]? monthDetailHtml(mk):''}`;
+    }).join('') : `<div class="empty">Henüz kayıt yok.</div>`}
+    <button class="secondary" style="width:100%;margin-top:12px;" onclick="printMonthly()">Bu ayın raporunu yazdır</button>
+  </section>`;
+}
+
+/* ===================== AYARLAR ===================== */
+function openSettings(){ settingsOpen = true; render(); }
+function closeSettings(){ settingsOpen = false; const o=document.getElementById('settingsOverlay'); if(o) o.remove(); }
+function closeSettingsAnd(fn){ closeSettings(); if(fn) fn(); }
+function renderSettingsModal(){
+  const ex = document.getElementById('settingsOverlay'); if(ex) ex.remove();
+  const age = backupAgeDays();
+  const div = document.createElement('div'); div.id='settingsOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeSettings(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <h3 style="margin:0;">Ayarlar</h3><button class="editbtn" onclick="closeSettings()">Kapat</button>
+    </div>
+
+    <div class="label" style="font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:0.9px;margin-bottom:8px;">Yedekleme</div>
+    <div class="empty" style="padding:0 0 10px;">Yedek; öğrenciler, ödemeler, taksitler, giderler, diğer gelirler ve kategorileri içerir. ${age===null? 'Henüz yedek alınmadı.' : `Son yedek ${age} gün önce.`}</div>
+    <div class="twocol" style="margin-bottom:8px;">
+      <button class="primary" onclick="exportBackup()">Dosyaya indir</button>
+      <button class="secondary" onclick="openTextBackupModal()">Metin olarak kopyala</button>
+    </div>
+    <div class="twocol" style="margin-bottom:18px;">
+      <button class="secondary" onclick="document.getElementById('importFile').click()">Dosyadan yükle</button>
+      <button class="secondary" onclick="openTextImportModal()">Metinden yükle</button>
+    </div>
+
+    <div class="label" style="font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:0.9px;margin-bottom:8px;">Fiş ve ekstre</div>
+    ${students.length? `<div class="field"><select id="r_student">${students.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select></div>
+    <div class="twocol" style="margin-bottom:18px;">
+      <button class="secondary" onclick="printStatement(document.getElementById('r_student').value)">Ekstre yazdır</button>
+      <button class="secondary" onclick="openReceiptPicker()">Son ödemenin fişi</button>
+    </div>` : `<div class="empty" style="padding:0 0 18px;">Önce öğrenci ekleyin.</div>`}
+
+    <div class="label" style="font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:0.9px;margin-bottom:8px;">Kilit</div>
+    <div class="empty" style="padding:0 0 10px;">${meta.pin? 'Açılışta 4 haneli PIN sorulur.' : 'Telefonu başkası eline aldığında verileri görmesin diye PIN belirleyebilirsiniz. PIN’i unutursanız yalnızca yedeğinizden dönebilirsiniz.'}</div>
+    <button class="secondary" style="width:100%;" onclick="${meta.pin? 'removePin()' : 'openPinModal()'}">${meta.pin? 'PIN’i kaldır' : 'PIN belirle'}</button>
+  </div>`;
+  document.body.appendChild(div);
+}
+function allMonths(){
+  const set = new Set();
+  payments.forEach(p=>set.add(monthKey(p.date)));
+  otherIncomes.forEach(o=>set.add(monthKey(o.date)));
+  expenses.forEach(e=>set.add(monthKey(e.date)));
+  set.add(currentMonthKey());
+  return Array.from(set).filter(Boolean).sort().reverse();
+}
+function toggleMonth(mk){ monthOpen[mk] = !monthOpen[mk]; render(); }
+function monthDetailHtml(mk){
+  const ps = payments.filter(p=>inMonth(p.date,mk)).sort((a,b)=>b.date.localeCompare(a.date));
+  const os = otherIncomes.filter(o=>inMonth(o.date,mk)).sort((a,b)=>b.date.localeCompare(a.date));
+  const es = expenses.filter(e=>inMonth(e.date,mk)).sort((a,b)=>b.date.localeCompare(a.date));
+  const unp = unpaidStudents(mk);
+  let h = `<div class="histbox">`;
+  h += ps.map(p=>`<div class="hrow"><span class="grow" style="color:var(--green);">${esc(memberNameOf(p.studentId, p.studentName))}</span><span>${fmtShort(p.date)}</span><span>${fmtMoney(p.amount)}</span></div>`).join('');
+  h += os.map(o=>`<div class="hrow"><span class="grow" style="color:var(--amber);">${esc(o.source||'Diğer')}</span><span>${fmtShort(o.date)}</span><span>${fmtMoney(o.amount)}</span></div>`).join('');
+  h += es.map(e=>`<div class="hrow"><span class="grow" style="color:var(--red);">${esc(catLabel(e.category))}${e.desc? ' · '+esc(e.desc):''}</span><span>${fmtShort(e.date)}</span><span>−${fmtMoney(e.amount)}</span></div>`).join('');
+  if(!ps.length && !os.length && !es.length) h += `<div class="empty" style="padding:6px 0;">Bu ay kayıt yok.</div>`;
+  if(unp.length) h += `<div class="hrow"><span class="grow" style="color:var(--muted);">Ödemeyen: ${esc(unp.map(s=>s.name).join(', '))}</span></div>`;
+  h += `</div>`;
+  return h;
+}
+
+/* ===================== YAZDIRMA ===================== */
+function doPrint(html){
+  const pa = document.getElementById('printArea');
+  pa.innerHTML = html;
+  window.print();
+}
+function printStatement(sid){
+  const s = students.find(x=>x.id===sid);
+  if(!s){ showAlert('Öğrenci seçin.'); return; }
+  const hist = studentPayments(sid).slice().reverse();
+  const inst = studentInstallments(sid);
+  let bal = 0;
+  const rows = hist.map(p=>{ bal += Number(p.amount||0); return `<tr><td>${fmtDate(p.date)}</td><td>${esc(p.note||'Ders ücreti')}</td><td class="r">${fmtMoney(p.amount)}</td><td class="r">${fmtMoney(bal)}</td></tr>`; }).join('');
+  const instRowsHtml = inst.map(i=>`<tr><td>${fmtDate(i.dueDate)}</td><td>${esc(i.note||'Taksit')}</td><td class="r">${fmtMoney(i.amount)}</td><td class="r">${i.paid? 'Ödendi':'Bekliyor'}</td></tr>`).join('');
+  doPrint(`
+    <h2>Öğrenci ekstresi</h2>
+    <div>${esc(s.name)}${s.phone? ' · '+esc(s.phone):''}</div>
+    <div>Düzenleme tarihi: ${fmtDate(todayStr())}</div>
+    <table><thead><tr><th>Tarih</th><th>Açıklama</th><th class="r">Tutar</th><th class="r">Birikimli</th></tr></thead>
+    <tbody>${rows || '<tr><td colspan="4">Ödeme kaydı yok.</td></tr>'}</tbody></table>
+    <p><b>Toplam tahsilat: ${fmtMoney(studentTotal(sid))}</b>${Number(s.debt)>0? ` · Açık borç: ${fmtMoney(s.debt)}`:''}</p>
+    ${inst.length? `<h3>Taksit planı</h3><table><thead><tr><th>Vade</th><th>Açıklama</th><th class="r">Tutar</th><th class="r">Durum</th></tr></thead><tbody>${instRowsHtml}</tbody></table>`:''}
+  `);
+}
+function openReceiptPicker(){
+  const sid = document.getElementById('r_student') ? document.getElementById('r_student').value : null;
+  const hist = sid ? studentPayments(sid) : [];
+  if(!hist.length){ showAlert('Bu öğrenci için fiş kesilecek bir ödeme kaydı yok.'); return; }
+  const p = hist[0];
+  printReceipt(p.id);
+}
+function printReceipt(pid){
+  const p = payments.find(x=>x.id===pid); if(!p) return;
+  const s = students.find(x=>x.id===p.studentId);
+  doPrint(`
+    <h2>Ödeme fişi</h2>
+    <table>
+      <tr><th>Öğrenci</th><td>${esc(s? s.name : (p.studentName ? p.studentName + ' (silinmiş)' : '—'))}</td></tr>
+      <tr><th>Tarih</th><td>${fmtDate(p.date)}</td></tr>
+      <tr><th>Açıklama</th><td>${esc(p.note || 'Ders ücreti')}</td></tr>
+      <tr><th>Tutar</th><td><b>${fmtMoney(p.amount)}</b></td></tr>
+    </table>
+    <p style="margin-top:24px;">Bu belge bilgi amaçlıdır, resmî fatura yerine geçmez.</p>
+    <p style="margin-top:40px;">İmza: ____________________</p>
+  `);
+}
+function printMonthly(){
+  const mk = currentMonthKey();
+  const inc = monthIncome(mk), ex = monthExpense(mk);
+  const unp = unpaidStudents(mk);
+  const paidList = students.filter(s=>paidInMonth(s.id,mk));
+  doPrint(`
+    <h2>${esc(monthLabel(mk))} özeti</h2>
+    <table>
+      <tr><th>Öğrenci tahsilatı</th><td class="r">${fmtMoney(inc.student)}</td></tr>
+      <tr><th>Diğer gelirler</th><td class="r">${fmtMoney(inc.other)}</td></tr>
+      <tr><th>Giderler</th><td class="r">−${fmtMoney(ex)}</td></tr>
+      <tr><th>Net</th><td class="r"><b>${fmtMoney(inc.total-ex)}</b></td></tr>
+    </table>
+    <h3>Ödeyenler (${paidList.length})</h3><div>${esc(paidList.map(s=>s.name).join(', ')) || '—'}</div>
+    <h3>Ödemeyenler (${unp.length})</h3><div>${esc(unp.map(s=>s.name).join(', ')) || '—'}</div>
+    <h3>Giderler</h3>
+    <table><thead><tr><th>Tarih</th><th>Kategori</th><th>Açıklama</th><th class="r">Tutar</th></tr></thead><tbody>
+    ${expenses.filter(e=>inMonth(e.date,mk)).sort((a,b)=>a.date.localeCompare(b.date)).map(e=>`<tr><td>${fmtDate(e.date)}</td><td>${esc(catLabel(e.category))}</td><td>${esc(e.desc||'')}</td><td class="r">${fmtMoney(e.amount)}</td></tr>`).join('') || '<tr><td colspan="4">Kayıt yok.</td></tr>'}
+    </tbody></table>
+  `);
+}
+
+/* ===================== taksit listesi ===================== */
 let instStudentExpanded = {};
 function toggleInstStudent(sid){ instStudentExpanded[sid] = !instStudentExpanded[sid]; render(); }
 function renderInstallmentList(list){
-  if(list.length===0){ return `<div class="empty">Bekleyen taksit yok.</div>`; }
+  if(!list.length) return `<div class="empty">Bekleyen taksit yok.</div>`;
   const groups = {};
-  list.forEach(i=>{
-    if(!groups[i.studentId]) groups[i.studentId] = [];
-    groups[i.studentId].push(i);
-  });
-  let out = '';
-  Object.keys(groups).forEach(sid=>{
-    const items = groups[sid].slice().sort((a,b)=> a.dueDate.localeCompare(b.dueDate));
+  list.forEach(i=>{ (groups[i.studentId] = groups[i.studentId]||[]).push(i); });
+  return Object.keys(groups).map(sid=>{
+    const items = groups[sid].slice().sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
     const total = items.reduce((s,i)=>s+Number(i.amount||0),0);
     const worst = items.some(i=>installmentStatus(i)==='overdue') ? 'overdue' : (items.some(i=>installmentStatus(i)==='upcoming') ? 'upcoming' : 'scheduled');
-    const isOpen = !!instStudentExpanded[sid];
-    out += `<div class="row-item" style="cursor:pointer;" onclick="toggleInstStudent('${sid}')">
-      <div><div class="name">${memberNameOf(sid)}</div><div class="sub">${items.length} taksit · Toplam ${fmtMoney(total)}</div></div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span class="badge ${installmentStatusClass(worst)}">${installmentStatusLabel(worst)}</span>
-        <span class="hist-toggle">${isOpen? 'Gizle' : 'Göster'}</span>
-      </div>
+    const open = !!instStudentExpanded[sid];
+    let out = `<div class="row-item" style="cursor:pointer;" onclick="toggleInstStudent('${sid}')">
+      <div><div class="name">${esc(memberNameOf(sid))}</div><div class="sub">${items.length} taksit · ${fmtMoney(total)} · ilk vade ${fmtShort(items[0].dueDate)}</div></div>
+      <div style="display:flex;gap:8px;align-items:center;"><span class="badge ${statusClass(worst)}">${statusLabel(worst)}</span></div>
     </div>`;
-    if(isOpen){
-      out += `<div class="histbox" style="margin:6px 0 4px;">`;
-      items.forEach(i=>{
-        const status = installmentStatus(i);
-        out += `<div class="hrow" style="align-items:center;">
-          <span>${fmtDate(i.dueDate)}${i.note? ' · '+i.note : ''}</span>
-          <span>${fmtMoney(i.amount)}</span>
-          <span style="display:flex;gap:8px;align-items:center;">
-            <span class="badge ${installmentStatusClass(status)}" style="font-size:10px;">${installmentStatusLabel(status)}</span>
-            <button class="linklike" onclick="event.stopPropagation(); markInstallmentPaid('${i.id}')">Ödendi</button>
-            <button class="linklike" onclick="event.stopPropagation(); openEditInstallmentModal('${i.id}')">Düzenle</button>
-            <button class="del" onclick="event.stopPropagation(); deleteInstallment('${i.id}')">Sil</button>
-          </span>
-        </div>`;
-      });
-      out += `</div>`;
+    if(open){
+      out += `<div class="histbox">${items.map(i=>{
+        const st = installmentStatus(i);
+        return `<div class="hrow"><span class="grow">${fmtDate(i.dueDate)}${i.note? ' · '+esc(i.note):''}</span><span>${fmtMoney(i.amount)}</span>
+        <span style="display:flex;gap:8px;align-items:center;"><span class="badge ${statusClass(st)}" style="font-size:10px;">${statusLabel(st)}</span>
+        <button class="linklike" onclick="event.stopPropagation();markInstallmentPaid('${i.id}')">Ödendi</button>
+        <button class="linklike" onclick="event.stopPropagation();openEditInstallmentModal('${i.id}')">Düzenle</button>
+        <button class="del" onclick="event.stopPropagation();deleteInstallment('${i.id}')">Sil</button></span></div>`;
+      }).join('')}</div>`;
     }
-  });
-  return out;
+    return out;
+  }).join('');
 }
 
-function markPaidToday(sid){
-  const s = students.find(x=>x.id===sid);
-  if(!s) return;
-  payments.push({id:uid(), studentId:sid, amount:s.price, date:todayStr(), createdAt:new Date().toISOString()});
-  saveList('coach_payments_v3', payments);
-  if(s.debt){ s.debt = null; s.debtDate = null; saveList('coach_students_v3', students); }
-  render();
-}
-function openCreditModal(sid){ creditModalStudentId = sid; render(); }
-function closeCreditModal(){ creditModalStudentId = null; const ov=document.getElementById('creditOverlay'); if(ov) ov.remove(); }
-function renderCreditModal(){
-  const s = students.find(x=>x.id===creditModalStudentId);
-  if(!s){ creditModalStudentId=null; return; }
-  const existing = document.getElementById('creditOverlay'); if(existing) existing.remove();
-  const div = document.createElement('div'); div.id='creditOverlay'; div.className='overlay';
-  div.onclick=(e)=>{ if(e.target===div) closeCreditModal(); };
-  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Kredi Tanımla — ${s.name}</h3>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 10px;">Bu öğrenciye ne kadar eksi bakiye tanımlamak istersin?</p>
-    <div class="field" style="margin-bottom:0;"><label>Eksi Bakiye Tutarı (₺)</label><input type="number" min="0" id="credit_amount" value="${s.debt||''}" onkeydown="if(event.key==='Enter'){submitCredit()}"></div>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeCreditModal()">Vazgeç</button>
-      <button class="primary" onclick="submitCredit()">Kaydet</button>
-    </div>
-  </div>`;
-  document.body.appendChild(div);
-}
-function submitCredit(){
-  const sid = creditModalStudentId;
-  const s = students.find(x=>x.id===sid);
-  if(!s) return;
-  const el = document.getElementById('credit_amount');
-  const amount = Number(el.value);
-  if(!amount || amount<=0){ showAlert('Lütfen geçerli bir eksi bakiye tutarı girin.'); return; }
-  s.debt = amount;
-  s.debtDate = todayStr();
-  saveList('coach_students_v3', students);
-  closeCreditModal();
-  render();
-}
-function clearDebt(sid){
-  const s = students.find(x=>x.id===sid);
-  if(!s) return;
-  s.debt = null; s.debtDate = null;
-  saveList('coach_students_v3', students);
-  render();
-}
-function deletePayment(pid){
-  askConfirm('Bu ödeme kaydı silinecek.', ()=>{
-    payments = payments.filter(p=>p.id!==pid);
-    saveList('coach_payments_v3', payments);
-    render();
-  });
-}
-function deleteStudent(sid){
-  const s = students.find(x=>x.id===sid);
-  const pending = installments.filter(i=>i.studentId===sid && !i.paid);
-  const warnings = [];
-  if(pending.length){
-    const byMonth = {};
-    pending.forEach(i=>{
-      const [y,m] = i.dueDate.split('-').map(Number);
-      const key = `${MONTH_SHORT[m-1]} ${y}`;
-      byMonth[key] = (byMonth[key]||0) + Number(i.amount||0);
-    });
-    const lines = Object.keys(byMonth).map(k=> `${k}: ${fmtMoney(byMonth[k])}`).join(', ');
-    warnings.push(`Bu öğrencinin henüz ödenmemiş taksitleri var — ${lines}. Öğrenci silinirse bu taksitler de tamamen kaldırılacak.`);
-  }
-  if(s && s.debt){
-    warnings.push(`Bu kişinin üzerinde ${fmtDate(s.debtDate)} tarihinde eklenmiş -${fmtMoney(s.debt)} tutarında bir kredi (eksi bakiye) var.`);
-  }
-  const message = warnings.length ? `${warnings.join(' ')} Yine de silmek istiyor musunuz?` : 'Bu öğrenci ve tüm ödeme kayıtları silinecek.';
-  askConfirm(message, ()=>{
-    students = students.filter(s=>s.id!==sid);
-    payments = payments.filter(p=>p.studentId!==sid);
-    installments = installments.filter(i=>i.studentId!==sid);
-    saveList('coach_students_v3', students);
-    saveList('coach_payments_v3', payments);
-    saveList('coach_installments_v1', installments);
-    render();
-  });
-}
-
-function askConfirm(message, action){ confirmState = {message, action}; render(); }
-function cancelConfirm(){ confirmState = null; const ov=document.getElementById('confirmOverlay'); if(ov) ov.remove(); }
-function confirmYes(){
-  const act = confirmState && confirmState.action;
-  confirmState = null;
-  const ov=document.getElementById('confirmOverlay'); if(ov) ov.remove();
-  if(act) act();
-}
-function renderConfirmModal(){
-  const existing = document.getElementById('confirmOverlay'); if(existing) existing.remove();
-  if(!confirmState) return;
-  const div = document.createElement('div'); div.id='confirmOverlay'; div.className='overlay';
-  div.onclick=(e)=>{ if(e.target===div) cancelConfirm(); };
-  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Emin misiniz?</h3>
-    <p style="font-size:13px;color:var(--muted);margin:0 0 4px;">${confirmState.message}</p>
-    <div class="modal-actions">
-      <button class="secondary" onclick="cancelConfirm()">Vazgeç</button>
-      <button class="primary" style="background:var(--red);color:#fff;" onclick="confirmYes()">Evet, Sil</button>
-    </div>
-  </div>`;
-  document.body.appendChild(div);
-}
-function showAlert(msg){ alertState = msg; render(); }
-function closeAlert(){ alertState = null; const ov=document.getElementById('alertOverlay'); if(ov) ov.remove(); }
-function renderAlertModal(){
-  const existing = document.getElementById('alertOverlay'); if(existing) existing.remove();
-  if(!alertState) return;
-  const div = document.createElement('div'); div.id='alertOverlay'; div.className='overlay';
-  div.onclick=(e)=>{ if(e.target===div) closeAlert(); };
-  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <p style="font-size:13px;margin:0 0 14px;">${alertState}</p>
-    <div class="modal-actions"><button class="primary" onclick="closeAlert()">Tamam</button></div>
-  </div>`;
-  document.body.appendChild(div);
-}
-
+/* ===================== öğrenci ekle / düzenle ===================== */
 function openAddModal(){ addModalOpen=true; render(); }
-function closeAddModal(){ addModalOpen=false; const ov=document.getElementById('addOverlay'); if(ov) ov.remove(); }
+function closeAddModal(){ addModalOpen=false; const o=document.getElementById('addOverlay'); if(o) o.remove(); }
+function studentFormFields(s){
+  s = s || {};
+  return `
+    <div class="field"><label>Ad Soyad</label><input type="text" id="f_name" value="${esc(s.name||'')}" placeholder="Örn: Ahmet Yılmaz"></div>
+    <div class="twocol">
+      <div class="field"><label>Ders ücreti (₺)</label><input type="number" min="0" inputmode="decimal" id="f_price" value="${esc(s.price||'')}" placeholder="1500"></div>
+      <div class="field"><label>Ödeme düzeni</label><select id="f_rhythm">
+        <option value="aylik" ${(s.rhythm||'aylik')==='aylik'?'selected':''}>Aylık</option>
+        <option value="paket" ${s.rhythm==='paket'?'selected':''}>Paket</option>
+        <option value="taksit" ${s.rhythm==='taksit'?'selected':''}>Taksitli</option>
+      </select></div>
+    </div>
+    <div class="twocol">
+      <div class="field"><label>Telefon</label><input type="tel" id="f_phone" value="${esc(s.phone||'')}" placeholder="05xx xxx xx xx"></div>
+      <div class="field"><label>Ders günü</label><input type="text" id="f_day" value="${esc(s.lessonDay||'')}" placeholder="Pzt 18:00"></div>
+    </div>
+    <div class="twocol">
+      <div class="field"><label>Paket ders sayısı</label><input type="number" min="0" id="f_ptotal" value="${esc(s.packageTotal||'')}" placeholder="8 / 12 / 30"></div>
+      <div class="field"><label>Kalan ders</label><input type="number" min="0" id="f_premain" value="${esc(s.packageRemaining!=null? s.packageRemaining : '')}"></div>
+    </div>
+    <div class="field"><label>Not</label><textarea id="f_note" rows="2" placeholder="Sınav tarihi, veli notu…">${esc(s.note||'')}</textarea></div>`;
+}
+function readStudentForm(){
+  const name = document.getElementById('f_name').value.trim();
+  const price = Number(document.getElementById('f_price').value||0);
+  if(!name){ showAlert('Ad soyad girin.'); return null; }
+  if(!price || price<=0){ showAlert('Ders ücreti girin.'); return null; }
+  const pt = document.getElementById('f_ptotal').value;
+  const pr = document.getElementById('f_premain').value;
+  return {
+    name, price,
+    rhythm: document.getElementById('f_rhythm').value,
+    phone: document.getElementById('f_phone').value.trim(),
+    lessonDay: document.getElementById('f_day').value.trim(),
+    packageTotal: pt===''? null : Number(pt),
+    packageRemaining: pr===''? (pt===''? null : Number(pt)) : Number(pr),
+    note: document.getElementById('f_note').value.trim()
+  };
+}
 function renderAddModal(){
-  const existing = document.getElementById('addOverlay'); if(existing) existing.remove();
+  const ex = document.getElementById('addOverlay'); if(ex) ex.remove();
   const div = document.createElement('div'); div.id='addOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeAddModal(); };
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Kişi Ekle</h3>
-    <div class="field"><label>Ad Soyad</label><input type="text" id="f_sname" placeholder="Örn: Ahmet Yılmaz"></div>
-    <div class="field"><label>Ders Ücreti (₺)</label><input type="number" min="0" id="f_sprice" placeholder="Örn: 1500" onkeydown="if(event.key==='Enter'){submitStudent()}"></div>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeAddModal()">Vazgeç</button>
-      <button class="primary" onclick="submitStudent()">Kaydet</button>
-    </div>
+    <h3>Kişi ekle</h3>${studentFormFields()}
+    <div class="modal-actions"><button class="secondary" onclick="closeAddModal()">Vazgeç</button><button class="primary" onclick="submitStudent()">Kaydet</button></div>
   </div>`;
   document.body.appendChild(div);
-  setTimeout(()=>document.getElementById('f_sname').focus(), 50);
+  setTimeout(()=>{ const el=document.getElementById('f_name'); if(el) el.focus(); }, 50);
 }
 function submitStudent(){
-  const name = document.getElementById('f_sname').value.trim();
-  const price = Number(document.getElementById('f_sprice').value||0);
-  if(!name){ showAlert('Ad Soyad girin.'); return; }
-  if(!price || price<=0){ showAlert('Ders ücreti girin.'); return; }
-  students.push({id:uid(), name, price});
-  saveList('coach_students_v3', students);
-  closeAddModal();
-  render();
+  const d = readStudentForm(); if(!d) return;
+  students.push({id:uid(), ...d, debt:null, debtDate:null, createdAt:new Date().toISOString()});
+  saveStudents(); closeAddModal(); render();
 }
-
 function openEditModal(sid){ editingStudentId = sid; render(); }
-function closeEditModal(){ editingStudentId = null; const ov=document.getElementById('editOverlay'); if(ov) ov.remove(); }
+function closeEditModal(){ editingStudentId=null; const o=document.getElementById('editOverlay'); if(o) o.remove(); }
 function renderEditModal(){
   const s = students.find(x=>x.id===editingStudentId);
   if(!s){ editingStudentId=null; return; }
-  const existing = document.getElementById('editOverlay'); if(existing) existing.remove();
+  const ex = document.getElementById('editOverlay'); if(ex) ex.remove();
   const div = document.createElement('div'); div.id='editOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeEditModal(); };
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Öğrenciyi Düzenle</h3>
-    <div class="field"><label>Ad Soyad</label><input type="text" id="e_sname" value="${s.name}"></div>
-    <div class="field"><label>Ders Ücreti (₺)</label><input type="number" min="0" id="e_sprice" value="${s.price}" onkeydown="if(event.key==='Enter'){submitEditStudent()}"></div>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeEditModal()">Vazgeç</button>
-      <button class="primary" onclick="submitEditStudent()">Kaydet</button>
-    </div>
+    <h3>Öğrenciyi düzenle</h3>${studentFormFields(s)}
+    <div class="modal-actions"><button class="secondary" onclick="closeEditModal()">Vazgeç</button><button class="primary" onclick="submitEditStudent()">Kaydet</button></div>
   </div>`;
   document.body.appendChild(div);
 }
 function submitEditStudent(){
-  const s = students.find(x=>x.id===editingStudentId);
-  if(!s) return;
-  const name = document.getElementById('e_sname').value.trim();
-  const price = Number(document.getElementById('e_sprice').value||0);
-  if(!name){ showAlert('Ad Soyad girin.'); return; }
-  if(!price || price<=0){ showAlert('Ders ücreti girin.'); return; }
-  s.name = name; s.price = price;
-  saveList('coach_students_v3', students);
-  closeEditModal();
-  render();
+  const s = students.find(x=>x.id===editingStudentId); if(!s) return;
+  const d = readStudentForm(); if(!d) return;
+  Object.assign(s, d);
+  saveStudents(); closeEditModal(); render();
 }
 
+/* ===================== ödeme düzenle / sil ===================== */
 function openEditPaymentModal(pid){ editingPaymentId = pid; render(); }
-function closeEditPaymentModal(){ editingPaymentId = null; const ov=document.getElementById('editPayOverlay'); if(ov) ov.remove(); }
+function closeEditPaymentModal(){ editingPaymentId=null; const o=document.getElementById('editPayOverlay'); if(o) o.remove(); }
 function renderEditPaymentModal(){
   const p = payments.find(x=>x.id===editingPaymentId);
   if(!p){ editingPaymentId=null; return; }
   const s = students.find(x=>x.id===p.studentId);
-  const existing = document.getElementById('editPayOverlay'); if(existing) existing.remove();
+  const ex = document.getElementById('editPayOverlay'); if(ex) ex.remove();
   const div = document.createElement('div'); div.id='editPayOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeEditPaymentModal(); };
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Ödemeyi Düzenle${s? ' — '+s.name : ''}</h3>
-    <div class="field"><label>Ödeme Tarihi</label><input type="date" id="ep_date" value="${p.date}"></div>
-    <div class="field"><label>Tutar (₺)</label><input type="number" min="0" id="ep_amount" value="${p.amount}" onkeydown="if(event.key==='Enter'){submitEditPayment()}"></div>
+    <h3>Ödemeyi düzenle${s? ' — '+esc(s.name):(p.studentName? ' — '+esc(p.studentName):'')}</h3>
+    <div class="twocol">
+      <div class="field"><label>Tarih</label><input type="date" id="ep_date" value="${esc(p.date)}"></div>
+      <div class="field"><label>Tutar (₺)</label><input type="number" min="0" id="ep_amount" value="${esc(p.amount)}"></div>
+    </div>
+    <div class="field"><label>Açıklama</label><input type="text" id="ep_note" value="${esc(p.note||'')}"></div>
     <div class="modal-actions">
       <button class="secondary" onclick="closeEditPaymentModal()">Vazgeç</button>
+      <button class="secondary" onclick="printReceipt('${p.id}')">Fiş</button>
       <button class="primary" onclick="submitEditPayment()">Kaydet</button>
     </div>
   </div>`;
   document.body.appendChild(div);
 }
 function submitEditPayment(){
-  const p = payments.find(x=>x.id===editingPaymentId);
-  if(!p) return;
+  const p = payments.find(x=>x.id===editingPaymentId); if(!p) return;
   const date = document.getElementById('ep_date').value;
   const amount = Number(document.getElementById('ep_amount').value||0);
+  const note = document.getElementById('ep_note').value.trim();
   if(!date){ showAlert('Tarih girin.'); return; }
   if(!amount || amount<=0){ showAlert('Geçerli bir tutar girin.'); return; }
-  p.date = date; p.amount = amount;
-  saveList('coach_payments_v3', payments);
-  closeEditPaymentModal();
+  p.date=date; p.amount=amount; p.note=note||null;
+  savePayments(); closeEditPaymentModal(); render();
+}
+function deletePayment(pid){
+  const p = payments.find(x=>x.id===pid); if(!p) return;
+  withUndo(`${fmtMoney(p.amount)} ödeme silindi.`, ()=>{ payments = payments.filter(x=>x.id!==pid); savePayments(); });
   render();
+}
+function deleteStudent(sid){
+  const s = students.find(x=>x.id===sid); if(!s) return;
+  const pend = installments.filter(i=>i.studentId===sid && !i.paid);
+  const warn = [];
+  if(pend.length) warn.push(`${pend.length} ödenmemiş taksit (${fmtMoney(pend.reduce((a,i)=>a+Number(i.amount||0),0))}) birlikte silinecek.`);
+  if(Number(s.debt)>0) warn.push(`${fmtMoney(s.debt)} açık borç kaydı kaybolacak.`);
+  askConfirm(`${esc(s.name)} silinecek. Geçmiş ödeme kayıtları korunacak. ${warn.join(' ')}`, ()=>{
+    withUndo(`${s.name} silindi.`, ()=>{
+      students = students.filter(x=>x.id!==sid);
+      payments.forEach(p=>{ if(p.studentId===sid && !p.studentName) p.studentName = s.name; });
+      installments = installments.filter(i=>i.studentId!==sid);
+      saveStudents(); savePayments(); saveInstallments();
+    });
+    detailStudentId=null; render();
+  });
 }
 
-/* ---------- installments (taksitler) ---------- */
-let instRows = []; // [{id, amount, date}]
-function openInstallmentModal(sid){
-  installmentModalStudentId = sid;
-  instRows = [];
-  render();
+/* ===================== kredi ===================== */
+function openCreditModal(sid){ creditModalStudentId = sid; render(); }
+function closeCreditModal(){ creditModalStudentId=null; const o=document.getElementById('creditOverlay'); if(o) o.remove(); }
+function renderCreditModal(){
+  const s = students.find(x=>x.id===creditModalStudentId);
+  if(!s){ creditModalStudentId=null; return; }
+  const ex = document.getElementById('creditOverlay'); if(ex) ex.remove();
+  const div = document.createElement('div'); div.id='creditOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeCreditModal(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <h3>Kredi (eksi bakiye) — ${esc(s.name)}</h3>
+    <div class="field"><label>Açık borç tutarı (₺)</label><input type="number" min="0" id="credit_amount" value="${esc(s.debt||'')}">
+    <div class="hint">Bu tutar öğrencinin size olan borcudur. Tahsilat yaparken “borçtan düşülecek tutar” alanıyla kısmen veya tamamen kapatabilirsiniz. 0 yazarsanız borç kaydı silinir.</div></div>
+    <div class="modal-actions"><button class="secondary" onclick="closeCreditModal()">Vazgeç</button><button class="primary" onclick="submitCredit()">Kaydet</button></div>
+  </div>`;
+  document.body.appendChild(div);
 }
-function closeInstallmentModal(){ installmentModalStudentId = null; instRows=[]; const ov=document.getElementById('instOverlay'); if(ov) ov.remove(); }
-function syncInstRowsFromDOM(){
-  instRows.forEach(row=>{
-    const a = document.getElementById('row_amount_'+row.id);
-    const d = document.getElementById('row_date_'+row.id);
-    if(a) row.amount = a.value;
-    if(d) row.date = d.value;
+function submitCredit(){
+  const s = students.find(x=>x.id===creditModalStudentId); if(!s) return;
+  const amount = Number(document.getElementById('credit_amount').value||0);
+  if(amount<0){ showAlert('Negatif tutar girilemez.'); return; }
+  if(!amount){ s.debt=null; s.debtDate=null; }
+  else { s.debt=amount; s.debtDate = s.debtDate || todayStr(); }
+  saveStudents(); closeCreditModal(); render();
+}
+
+/* ===================== taksit planı ===================== */
+function openInstallmentModal(sid){ installmentModalStudentId = sid; instRows = []; render(); }
+function closeInstallmentModal(){ installmentModalStudentId=null; instRows=[]; const o=document.getElementById('instOverlay'); if(o) o.remove(); }
+function syncInstRows(){
+  instRows.forEach(r=>{
+    const a = document.getElementById('row_amount_'+r.id), d = document.getElementById('row_date_'+r.id);
+    if(a) r.amount = a.value; if(d) r.date = d.value;
   });
-  const uf = document.getElementById('i_upfront');
-  if(uf) instRows._upfront = uf.value;
+  const uf = document.getElementById('i_upfront'); if(uf) instRows._upfront = uf.value;
 }
 function addInstallmentRow(){
-  syncInstRowsFromDOM();
-  let suggestedDate = todayStr();
+  syncInstRows();
+  let sug = todayStr();
   const last = instRows[instRows.length-1];
   if(last && last.date){
     const [y,m,dd] = last.date.split('-').map(Number);
-    const d = new Date(y, m-1, dd);
-    d.setMonth(d.getMonth()+1);
-    const yy = d.getFullYear();
-    const mm = String(d.getMonth()+1).padStart(2,'0');
-    const day = String(d.getDate()).padStart(2,'0');
-    suggestedDate = `${yy}-${mm}-${day}`;
+    const d = new Date(y, m-1, dd); d.setMonth(d.getMonth()+1);
+    sug = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   }
-  instRows.push({id:uid(), amount:'', date:suggestedDate});
-  render();
+  instRows.push({id:uid(), amount:'', date:sug});
+  renderInstallmentModal();
 }
-function removeInstallmentRow(rid){
-  syncInstRowsFromDOM();
-  instRows = instRows.filter(r=>r.id!==rid);
-  render();
-}
+function removeInstallmentRow(rid){ syncInstRows(); instRows = instRows.filter(r=>r.id!==rid); renderInstallmentModal(); }
 function renderInstallmentModal(){
   const s = students.find(x=>x.id===installmentModalStudentId);
   if(!s){ installmentModalStudentId=null; return; }
-  const existing = document.getElementById('instOverlay'); if(existing) existing.remove();
+  const ex = document.getElementById('instOverlay'); if(ex) ex.remove();
   const div = document.createElement('div'); div.id='instOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeInstallmentModal(); };
-  const upfrontVal = instRows._upfront || '';
-  let rowsHtml = '';
-  instRows.forEach((row,idx)=>{
-    rowsHtml += `<div style="display:flex; align-items:center; gap:6px; padding:7px 0; ${idx>0 ? 'border-top:1px solid var(--line);' : ''}">
-      <span style="flex:0 0 auto; font-size:11px; font-weight:800; color:var(--muted); font-family:var(--mono); white-space:nowrap;">${idx+1}. Taksit</span>
-      <input type="number" min="0" id="row_amount_${row.id}" value="${row.amount}" placeholder="Tutar" style="flex:1 1 0; min-width:0; padding:10px 8px; border-radius:10px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px;">
-      <input type="date" id="row_date_${row.id}" value="${row.date}" style="flex:1 1 0; min-width:0; padding:10px 6px; border-radius:10px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:16px;">
-      <button type="button" onclick="removeInstallmentRow('${row.id}')" aria-label="Taksiti Sil" style="flex:0 0 auto; width:26px; height:26px; border-radius:8px; border:1px solid var(--line); background:var(--surface2); color:var(--red); font-size:13px; line-height:1; cursor:pointer;">✕</button>
-    </div>`;
-  });
+  const rows = instRows.map((r,idx)=>`<div style="display:flex;align-items:center;gap:6px;padding:7px 0;${idx>0?'border-top:1px solid var(--line);':''}">
+    <span style="flex:0 0 auto;font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap;">${idx+1}.</span>
+    <input type="number" min="0" id="row_amount_${r.id}" value="${esc(r.amount)}" placeholder="Tutar" style="flex:1 1 0;min-width:0;padding:10px 8px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);font-size:16px;">
+    <input type="date" id="row_date_${r.id}" value="${esc(r.date)}" style="flex:1 1 0;min-width:0;padding:10px 6px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);font-size:16px;">
+    <button type="button" onclick="removeInstallmentRow('${r.id}')" aria-label="Satırı sil" style="flex:0 0 auto;width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--red);cursor:pointer;">✕</button>
+  </div>`).join('');
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Taksitli Paket — ${s.name}</h3>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 10px;">Örn: 30 derslik paket — bir kısmı bugün alınıyor (peşinat), kalanı istediğin sayıda taksitle, her biri ayrı tarih ve tutarla.</p>
-    <div class="field" style="margin-bottom:8px;"><label>Peşinat / Şimdi Alınan Tutar (varsa, ₺)</label><input type="number" min="0" id="i_upfront" value="${upfrontVal}" placeholder="Örn: 10000 (yoksa boş bırakın)"></div>
-    <p style="font-size:11px;color:var(--muted);margin:-4px 0 10px;">Girilirse bugünün tarihiyle hemen ödeme olarak kaydedilir.</p>
-    ${rowsHtml}
-    <button class="secondary" style="width:100%; margin-top:${instRows.length?'10px':'0'}; margin-bottom:14px;" onclick="addInstallmentRow()">+ Taksit Ekle</button>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeInstallmentModal()">Vazgeç</button>
-      <button class="primary" onclick="submitInstallment()">Kaydet</button>
-    </div>
+    <h3>Taksitli paket — ${esc(s.name)}</h3>
+    <div class="field"><label>Peşinat (varsa, ₺)</label><input type="number" min="0" id="i_upfront" value="${esc(instRows._upfront||'')}" placeholder="Yoksa boş bırakın">
+    <div class="hint">Girilirse bugünün tarihiyle tahsilat olarak kaydedilir.</div></div>
+    ${rows}
+    <button class="secondary" style="width:100%;margin:10px 0 4px;" onclick="addInstallmentRow()">+ Taksit satırı</button>
+    <div class="modal-actions"><button class="secondary" onclick="closeInstallmentModal()">Vazgeç</button><button class="primary" onclick="submitInstallment()">Kaydet</button></div>
   </div>`;
   document.body.appendChild(div);
 }
 function submitInstallment(){
-  syncInstRowsFromDOM();
+  syncInstRows();
   const sid = installmentModalStudentId;
   const upfront = Number(instRows._upfront||0);
-  const validRows = instRows.filter(r=> Number(r.amount)>0);
-  const invalidRow = validRows.find(r=> !r.date);
-  if(!upfront && validRows.length===0){ showAlert('Peşinat veya en az bir taksit satırı girin.'); return; }
-  if(invalidRow){ showAlert('Tutar girilen her taksit satırı için vade tarihi de girilmeli.'); return; }
+  const valid = instRows.filter(r=>Number(r.amount)>0);
+  if(!upfront && !valid.length){ showAlert('Peşinat veya en az bir taksit satırı girin.'); return; }
+  if(valid.some(r=>!r.date)){ showAlert('Tutar girilen her satır için vade tarihi de gerekli.'); return; }
   if(upfront>0){
-    payments.push({id:uid(), studentId:sid, amount:upfront, date:todayStr(), createdAt:new Date().toISOString(), note:'Peşinat'});
-    saveList('coach_payments_v3', payments);
+    payments.push({id:uid(), studentId:sid, amount:upfront, date:todayStr(), note:'Peşinat', createdAt:new Date().toISOString()});
+    savePayments();
   }
-  instRows.forEach((r,idx)=>{
-    if(Number(r.amount)>0){
-      installments.push({id:uid(), studentId:sid, amount:Number(r.amount), dueDate:r.date, paid:false, paidDate:null, note:`${idx+1}. Taksit`, createdAt:new Date().toISOString()});
-    }
+  valid.forEach((r,idx)=>{
+    installments.push({id:uid(), studentId:sid, amount:Number(r.amount), dueDate:r.date, paid:false, paidDate:null, note:`${idx+1}. taksit`, createdAt:new Date().toISOString()});
   });
-  if(validRows.length){ saveList('coach_installments_v1', installments); }
-  closeInstallmentModal();
-  render();
+  if(valid.length) saveInstallments();
+  const s = students.find(x=>x.id===sid); if(s && s.rhythm!=='taksit'){ s.rhythm='taksit'; saveStudents(); }
+  closeInstallmentModal(); render();
 }
 function markInstallmentPaid(iid){
-  const i = installments.find(x=>x.id===iid);
-  if(!i) return;
-  i.paid = true;
-  i.paidDate = todayStr();
-  payments.push({id:uid(), studentId:i.studentId, amount:i.amount, date:todayStr(), createdAt:new Date().toISOString(), note:i.note||'Taksit ödemesi'});
-  saveList('coach_installments_v1', installments);
-  saveList('coach_payments_v3', payments);
-  render();
+  const i = installments.find(x=>x.id===iid); if(!i) return;
+  const snap = snapshot();
+  i.paid = true; i.paidDate = todayStr();
+  payments.push({id:uid(), studentId:i.studentId, amount:i.amount, date:todayStr(), note:i.note||'Taksit ödemesi', installmentId:i.id, createdAt:new Date().toISOString()});
+  saveInstallments(); savePayments(); render();
+  showToast(`${fmtMoney(i.amount)} taksit tahsil edildi.`, ()=>restoreSnapshot(snap));
 }
 function deleteInstallment(iid){
-  askConfirm('Bu taksit planı silinecek (henüz kaydedilmiş bir ödemeyi silmez).', ()=>{
-    installments = installments.filter(x=>x.id!==iid);
-    saveList('coach_installments_v1', installments);
-    render();
-  });
+  const i = installments.find(x=>x.id===iid); if(!i) return;
+  withUndo('Taksit silindi.', ()=>{ installments = installments.filter(x=>x.id!==iid); saveInstallments(); });
+  render();
 }
-let editingInstallmentId = null;
 function openEditInstallmentModal(iid){ editingInstallmentId = iid; render(); }
-function closeEditInstallmentModal(){ editingInstallmentId = null; const ov=document.getElementById('editInstOverlay'); if(ov) ov.remove(); }
+function closeEditInstallmentModal(){ editingInstallmentId=null; const o=document.getElementById('editInstOverlay'); if(o) o.remove(); }
 function renderEditInstallmentModal(){
   const i = installments.find(x=>x.id===editingInstallmentId);
   if(!i){ editingInstallmentId=null; return; }
   const s = students.find(x=>x.id===i.studentId);
-  const existing = document.getElementById('editInstOverlay'); if(existing) existing.remove();
+  const ex = document.getElementById('editInstOverlay'); if(ex) ex.remove();
   const div = document.createElement('div'); div.id='editInstOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeEditInstallmentModal(); };
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Taksiti Düzenle${s? ' — '+s.name : ''}</h3>
-    <div class="field"><label>Tutar (₺)</label><input type="number" min="0" id="ei_amount" value="${i.amount}"></div>
-    <div class="field"><label>Vade Tarihi</label><input type="date" id="ei_date" value="${i.dueDate}"></div>
-    <div class="field"><label>Not (opsiyonel)</label><input type="text" id="ei_note" value="${i.note||''}" onkeydown="if(event.key==='Enter'){submitEditInstallment()}"></div>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeEditInstallmentModal()">Vazgeç</button>
-      <button class="primary" onclick="submitEditInstallment()">Kaydet</button>
+    <h3>Taksiti düzenle${s? ' — '+esc(s.name):''}</h3>
+    <div class="twocol">
+      <div class="field"><label>Tutar (₺)</label><input type="number" min="0" id="ei_amount" value="${esc(i.amount)}"></div>
+      <div class="field"><label>Vade</label><input type="date" id="ei_date" value="${esc(i.dueDate)}"></div>
     </div>
+    <div class="field"><label>Not</label><input type="text" id="ei_note" value="${esc(i.note||'')}"></div>
+    <div class="modal-actions"><button class="secondary" onclick="closeEditInstallmentModal()">Vazgeç</button><button class="primary" onclick="submitEditInstallment()">Kaydet</button></div>
   </div>`;
   document.body.appendChild(div);
 }
 function submitEditInstallment(){
-  const i = installments.find(x=>x.id===editingInstallmentId);
-  if(!i) return;
+  const i = installments.find(x=>x.id===editingInstallmentId); if(!i) return;
   const amount = Number(document.getElementById('ei_amount').value||0);
   const dueDate = document.getElementById('ei_date').value;
   const note = document.getElementById('ei_note').value.trim();
   if(!amount || amount<=0){ showAlert('Geçerli bir tutar girin.'); return; }
   if(!dueDate){ showAlert('Vade tarihi girin.'); return; }
-  i.amount = amount; i.dueDate = dueDate; i.note = note;
-  saveList('coach_installments_v1', installments);
-  closeEditInstallmentModal();
-  render();
+  i.amount=amount; i.dueDate=dueDate; i.note=note;
+  saveInstallments(); closeEditInstallmentModal(); render();
 }
 
-/* ---------- backup / restore ---------- */
+/* ===================== yedekleme ===================== */
+function backupPayload(){
+  return {
+    version: BACKUP_VERSION,
+    exportedAt: new Date().toISOString(),
+    students, payments, installments, expenses, otherIncomes,
+    expenseCats
+  };
+}
+function markBackedUp(){ meta.lastBackupAt = new Date().toISOString(); saveMeta(); }
 function exportBackup(){
   try{
-    const data = {students, payments, installments, exportedAt:new Date().toISOString()};
-    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const blob = new Blob([JSON.stringify(backupPayload(),null,2)], {type:'application/json'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'odeme-takip-yedek-'+todayStr()+'.json';
+    a.href=url; a.download='odeme-takip-yedek-'+todayStr()+'.json';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    markBackedUp(); render();
+    showToast('Yedek dosyası indirildi.', null);
   }catch(e){
-    console.error('indirme hatası', e);
-    showAlert('Dosya indirme bu ekranda çalışmadı. Bunun yerine "Yedeği Metin Olarak Göster / Kopyala" butonunu kullanabilirsiniz.');
+    showAlert('Dosya indirilemedi. Bunun yerine yedeği metin olarak kopyalayabilirsiniz.');
     openTextBackupModal();
   }
 }
-let textBackupOpen = false;
-let textImportOpen = false;
-function openTextBackupModal(){ textBackupOpen = true; render(); }
-function closeTextBackupModal(){ textBackupOpen = false; const ov=document.getElementById('textBackupOverlay'); if(ov) ov.remove(); }
+function openTextBackupModal(){ textBackupOpen=true; render(); }
+function closeTextBackupModal(){ textBackupOpen=false; const o=document.getElementById('textBackupOverlay'); if(o) o.remove(); }
 function renderTextBackupModal(){
-  const existing = document.getElementById('textBackupOverlay'); if(existing) existing.remove();
-  const data = {students, payments, installments, exportedAt:new Date().toISOString()};
-  const json = JSON.stringify(data);
+  const ex = document.getElementById('textBackupOverlay'); if(ex) ex.remove();
+  const json = JSON.stringify(backupPayload());
   const div = document.createElement('div'); div.id='textBackupOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeTextBackupModal(); };
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Yedek Metni</h3>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 10px;">Aşağıdaki metnin tamamını kopyalayıp Notlar veya benzeri bir uygulamaya kaydedin. Geri yüklemek için "Metinden İçe Aktar" bölümüne yapıştırın.</p>
-    <textarea id="backupTextArea" readonly style="width:100%; height:160px; font-family:var(--mono); font-size:11px; padding:10px; border-radius:8px; border:1px solid var(--line); background:var(--surface2); color:var(--text);">${json}</textarea>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeTextBackupModal()">Kapat</button>
-      <button class="primary" onclick="copyBackupText()">Kopyala</button>
-    </div>
+    <h3>Yedek metni</h3>
+    <p class="empty" style="padding-top:0;">Metnin tamamını kopyalayıp Notlar’a veya kendinize göndereceğiniz bir mesaja kaydedin. Geri yüklemek için “Metinden geri yükle” bölümüne yapıştırın.</p>
+    <textarea id="backupTextArea" readonly style="width:100%;height:150px;font-family:var(--mono);font-size:11px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);">${esc(json)}</textarea>
+    <div class="modal-actions"><button class="secondary" onclick="closeTextBackupModal()">Kapat</button><button class="primary" onclick="copyBackupText()">Kopyala</button></div>
   </div>`;
   document.body.appendChild(div);
 }
 function copyBackupText(){
   const ta = document.getElementById('backupTextArea');
   ta.focus(); ta.select();
-  let copied = false;
-  try{ copied = document.execCommand('copy'); }catch(e){}
-  if(!copied && navigator.clipboard){
-    navigator.clipboard.writeText(ta.value).then(()=>showAlert('Kopyalandı.')).catch(()=>showAlert('Kopyalanamadı, metni elle seçip kopyalayın.'));
+  let ok=false;
+  try{ ok = document.execCommand('copy'); }catch(e){}
+  if(!ok && navigator.clipboard){
+    navigator.clipboard.writeText(ta.value).then(()=>{ markBackedUp(); showAlert('Kopyalandı.'); }).catch(()=>showAlert('Kopyalanamadı, metni elle seçip kopyalayın.'));
     return;
   }
-  showAlert(copied ? 'Kopyalandı.' : 'Kopyalanamadı, metni elle seçip kopyalayın.');
+  if(ok) markBackedUp();
+  showAlert(ok? 'Kopyalandı.' : 'Kopyalanamadı, metni elle seçip kopyalayın.');
 }
-function openTextImportModal(){ textImportOpen = true; render(); }
-function closeTextImportModal(){ textImportOpen = false; const ov=document.getElementById('textImportOverlay'); if(ov) ov.remove(); }
+function openTextImportModal(){ textImportOpen=true; render(); }
+function closeTextImportModal(){ textImportOpen=false; const o=document.getElementById('textImportOverlay'); if(o) o.remove(); }
 function renderTextImportModal(){
-  const existing = document.getElementById('textImportOverlay'); if(existing) existing.remove();
+  const ex = document.getElementById('textImportOverlay'); if(ex) ex.remove();
   const div = document.createElement('div'); div.id='textImportOverlay'; div.className='overlay';
   div.onclick=(e)=>{ if(e.target===div) closeTextImportModal(); };
   div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
-    <h3>Metinden İçe Aktar</h3>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 10px;">Kaydettiğiniz yedek metnini aşağıya yapıştırın.</p>
-    <textarea id="importTextArea" placeholder='{"students":[...],"payments":[...]}' style="width:100%; height:160px; font-family:var(--mono); font-size:11px; padding:10px; border-radius:8px; border:1px solid var(--line); background:var(--surface2); color:var(--text);"></textarea>
-    <div class="modal-actions">
-      <button class="secondary" onclick="closeTextImportModal()">Vazgeç</button>
-      <button class="primary" onclick="submitTextImport()">İçe Aktar</button>
-    </div>
+    <h3>Metinden geri yükle</h3>
+    <p class="empty" style="padding-top:0;">Kaydettiğiniz yedek metnini yapıştırın.</p>
+    <textarea id="importTextArea" placeholder='{"version":2,"students":[…]}' style="width:100%;height:150px;font-family:var(--mono);font-size:11px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);"></textarea>
+    <div class="modal-actions"><button class="secondary" onclick="closeTextImportModal()">Vazgeç</button><button class="primary" onclick="submitTextImport()">Devam</button></div>
   </div>`;
   document.body.appendChild(div);
 }
 function submitTextImport(){
   const raw = document.getElementById('importTextArea').value.trim();
-  try{
-    const data = JSON.parse(raw);
-    if(!Array.isArray(data.students) || !Array.isArray(data.payments)) throw new Error('geçersiz format');
-    closeTextImportModal();
-    askConfirm('Mevcut liste, yapıştırılan yedekle değiştirilecek.', ()=>{
-      students = data.students; payments = data.payments; installments = Array.isArray(data.installments) ? data.installments : [];
-      saveList('coach_students_v3', students);
-      saveList('coach_payments_v3', payments);
-      saveList('coach_installments_v1', installments);
-      render();
-    });
-  }catch(err){
-    showAlert('Yapıştırılan metin okunamadı. Doğru bir yedek metni olduğundan emin olun.');
-  }
+  let data;
+  try{ data = JSON.parse(raw); }catch(e){ showAlert('Yapıştırılan metin okunamadı.'); return; }
+  closeTextImportModal();
+  askImportMode(data);
 }
 function handleImportFile(evt){
-  const file = evt.target.files[0];
-  if(!file) return;
+  const file = evt.target.files[0]; if(!file) return;
   const reader = new FileReader();
   reader.onload = function(e){
-    try{
-      const data = JSON.parse(e.target.result);
-      if(!Array.isArray(data.students) || !Array.isArray(data.payments)) throw new Error('geçersiz format');
-      askConfirm('Mevcut liste, yedekteki verilerle değiştirilecek.', ()=>{
-        students = data.students; payments = data.payments; installments = Array.isArray(data.installments) ? data.installments : [];
-        saveList('coach_students_v3', students);
-        saveList('coach_payments_v3', payments);
-        saveList('coach_installments_v1', installments);
-        render();
-      });
-    }catch(err){
-      showAlert('Yedek dosyası okunamadı. Doğru bir yedek dosyası seçtiğinizden emin olun.');
-    }
-    evt.target.value = '';
+    let data;
+    try{ data = JSON.parse(e.target.result); }catch(err){ showAlert('Yedek dosyası okunamadı.'); evt.target.value=''; return; }
+    evt.target.value='';
+    askImportMode(data);
   };
   reader.readAsText(file);
+}
+function askImportMode(data){
+  if(!data || !Array.isArray(data.students) || !Array.isArray(data.payments)){ showAlert('Bu dosya geçerli bir yedek değil.'); return; }
+  const info = `Yedek içeriği: ${data.students.length} öğrenci, ${data.payments.length} ödeme, ${(data.installments||[]).length} taksit, ${(data.expenses||[]).length} gider, ${(data.otherIncomes||[]).length} diğer gelir.`;
+  importPending = data;
+  askConfirmCustom('Yedeği geri yükle', info + ' Mevcut verilerin üzerine mi yazılsın, yoksa mevcutla birleştirilsin mi?', [
+    {label:'Üzerine yaz', cls:'primary', style:'background:var(--red);color:#fff;', fn:()=>applyImport('replace')},
+    {label:'Birleştir', cls:'primary', fn:()=>applyImport('merge')}
+  ]);
+}
+let importPending = null;
+function applyImport(mode){
+  const data = importPending; if(!data) return;
+  const snap = snapshot();
+  const inc = {
+    students: data.students||[], payments: data.payments||[],
+    installments: data.installments||[], expenses: data.expenses||[],
+    otherIncomes: data.otherIncomes||[]
+  };
+  // eski (v1) yedekler: gider kutularını işleme çevir
+  if(!data.version && Array.isArray(data.expenses) && data.expenses.length && data.expenses[0].month){
+    inc.expenses = data.expenses.map(e=>({id:e.id||uid(), date:(e.month)+'-01', category:e.category, amount:Number(e.amount)||0, desc:'Eski kayıttan aktarıldı', createdAt:e.createdAt}));
+  }
+  if(mode==='replace'){
+    students=inc.students; payments=inc.payments; installments=inc.installments; expenses=inc.expenses; otherIncomes=inc.otherIncomes;
+  } else {
+    const mergeById = (cur, add)=>{
+      const ids = new Set(cur.map(x=>x.id));
+      return cur.concat(add.filter(x=>x && !ids.has(x.id)));
+    };
+    students = mergeById(students, inc.students);
+    payments = mergeById(payments, inc.payments);
+    installments = mergeById(installments, inc.installments);
+    expenses = mergeById(expenses, inc.expenses);
+    otherIncomes = mergeById(otherIncomes, inc.otherIncomes);
+  }
+  if(Array.isArray(data.expenseCats) && data.expenseCats.length){
+    const keys = new Set(expenseCats.map(c=>c.key));
+    expenseCats = expenseCats.concat(data.expenseCats.filter(c=>!keys.has(c.key)));
+    saveList(KEYS.cats, expenseCats);
+  }
+  saveAll(); importPending=null; render();
+  showToast(mode==='replace'? 'Yedek geri yüklendi (üzerine yazıldı).' : 'Yedek mevcut verilerle birleştirildi.', ()=>restoreSnapshot(snap));
+}
+
+/* ===================== PIN ===================== */
+function hashPin(p){ let h=5381; for(let i=0;i<p.length;i++){ h=((h<<5)+h+p.charCodeAt(i))>>>0; } return 'h'+h; }
+function openPinModal(){ pinModalOpen=true; render(); }
+function closePinModal(){ pinModalOpen=false; const o=document.getElementById('pinOverlay'); if(o) o.remove(); }
+function renderPinModal(){
+  const ex = document.getElementById('pinOverlay'); if(ex) ex.remove();
+  const div = document.createElement('div'); div.id='pinOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closePinModal(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <h3>PIN belirle</h3>
+    <div class="field"><label>4 haneli PIN</label><input type="tel" inputmode="numeric" maxlength="4" id="pin1" placeholder="••••"></div>
+    <div class="field"><label>Tekrar</label><input type="tel" inputmode="numeric" maxlength="4" id="pin2" placeholder="••••"></div>
+    <div class="empty" style="padding-top:0;">PIN’i unutursanız verilere yalnızca yedeğinizden ulaşabilirsiniz. Önce yedek almanız önerilir.</div>
+    <div class="modal-actions"><button class="secondary" onclick="closePinModal()">Vazgeç</button><button class="primary" onclick="submitPin()">Kaydet</button></div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function submitPin(){
+  const a = document.getElementById('pin1').value.trim(), b = document.getElementById('pin2').value.trim();
+  if(!/^\d{4}$/.test(a)){ showAlert('4 haneli bir sayı girin.'); return; }
+  if(a!==b){ showAlert('İki PIN aynı değil.'); return; }
+  meta.pin = hashPin(a); saveMeta(); closePinModal(); render();
+}
+function removePin(){
+  askConfirm('Uygulama kilidi kaldırılacak.', ()=>{ meta.pin=null; saveMeta(); render(); });
+}
+function renderLock(){
+  document.getElementById('app').innerHTML = `
+  <div style="max-width:320px;margin:18vh auto 0;text-align:center;">
+    <div class="eyebrow" style="display:inline-block;font-size:11px;color:#fff;background:var(--red);padding:4px 11px;border-radius:999px;font-weight:800;">Kilitli</div>
+    <h1 style="font-size:20px;margin:10px 0 18px;">Ödeme Takip Sistemi</h1>
+    <input type="tel" inputmode="numeric" maxlength="4" id="lockPin" placeholder="••••"
+      style="width:100%;text-align:center;letter-spacing:12px;font-size:26px;padding:14px;border-radius:14px;border:1px solid var(--line);background:#fff;"
+      onkeydown="if(event.key==='Enter'){tryUnlock()}" oninput="if(this.value.length===4) tryUnlock()">
+    <button class="primary" style="width:100%;margin-top:12px;" onclick="tryUnlock()">Aç</button>
+    <div id="lockMsg" style="color:var(--red);font-size:12.5px;font-weight:700;margin-top:10px;"></div>
+  </div>`;
+  setTimeout(()=>{ const el=document.getElementById('lockPin'); if(el) el.focus(); },60);
+}
+function tryUnlock(){
+  const v = document.getElementById('lockPin').value.trim();
+  if(hashPin(v)===meta.pin){ locked=false; render(); return; }
+  if(v.length>=4){
+    document.getElementById('lockMsg').textContent = 'PIN hatalı.';
+    document.getElementById('lockPin').value='';
+  }
+}
+
+/* ===================== confirm / alert ===================== */
+function askConfirm(message, action){ confirmState = {message, action, buttons:null}; render(); }
+function askConfirmCustom(title, message, buttons){ confirmState = {title, message, buttons}; render(); }
+function cancelConfirm(){ confirmState=null; importPending=null; const o=document.getElementById('confirmOverlay'); if(o) o.remove(); }
+function confirmYes(){
+  const act = confirmState && confirmState.action;
+  confirmState=null; const o=document.getElementById('confirmOverlay'); if(o) o.remove();
+  if(act) act();
+}
+function confirmBtn(idx){
+  const b = confirmState && confirmState.buttons && confirmState.buttons[idx];
+  confirmState=null; const o=document.getElementById('confirmOverlay'); if(o) o.remove();
+  if(b && b.fn) b.fn();
+}
+function renderConfirmModal(){
+  const ex = document.getElementById('confirmOverlay'); if(ex) ex.remove();
+  if(!confirmState) return;
+  const div = document.createElement('div'); div.id='confirmOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) cancelConfirm(); };
+  const actions = confirmState.buttons
+    ? confirmState.buttons.map((b,i)=>`<button class="${b.cls||'secondary'}" style="${b.style||''}" onclick="confirmBtn(${i})">${esc(b.label)}</button>`).join('')
+    : `<button class="secondary" onclick="cancelConfirm()">Vazgeç</button><button class="primary" style="background:var(--red);" onclick="confirmYes()">Evet, sil</button>`;
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <h3>${esc(confirmState.title || 'Emin misiniz?')}</h3>
+    <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.5;font-weight:600;">${confirmState.message}</p>
+    <div class="modal-actions">${confirmState.buttons? `<button class="secondary" onclick="cancelConfirm()">Vazgeç</button>`:''}${actions}</div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function showAlert(msg){ alertState = msg; render(); }
+function closeAlert(){ alertState=null; const o=document.getElementById('alertOverlay'); if(o) o.remove(); }
+function renderAlertModal(){
+  const ex = document.getElementById('alertOverlay'); if(ex) ex.remove();
+  if(!alertState) return;
+  const div = document.createElement('div'); div.id='alertOverlay'; div.className='overlay';
+  div.onclick=(e)=>{ if(e.target===div) closeAlert(); };
+  div.innerHTML = `<div class="modal" onclick="event.stopPropagation()">
+    <p style="font-size:13.5px;margin:0 0 12px;line-height:1.5;font-weight:600;">${esc(alertState)}</p>
+    <div class="modal-actions"><button class="primary" onclick="closeAlert()">Tamam</button></div>
+  </div>`;
+  document.body.appendChild(div);
 }
 
 loadAll();
